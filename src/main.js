@@ -5,6 +5,9 @@ import VueOnsen from 'vue-onsenui';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import 'firebase/firestore';
+import firebaseui from 'firebaseui-ja'
+import 'firebaseui-ja/dist/firebaseui.css'
 // import router from './router.js';
 
 
@@ -22,32 +25,11 @@ var config = {
   measurementId: "G-Q8WHJF1QRV"
 }
 firebase.initializeApp(config)
+const db = firebase.firestore();
 
-
-// <!-- The core Firebase JS SDK is always required and must be listed first -->
-// <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
-
-// <!-- TODO: Add SDKs for Firebase products that you want to use
-//      https://firebase.google.com/docs/web/setup#available-libraries -->
-// <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-analytics.js"></script>
-
-// <script>
-//   // Your web app's Firebase configuration
-//   var firebaseConfig = {
-//     apiKey: "AIzaSyDQIzccqwhpPtgd4AswJINVHnc4ETBpv98",
-//     authDomain: "gameapp-alive.firebaseapp.com",
-//     databaseURL: "https://gameapp-alive.firebaseio.com",
-//     projectId: "gameapp-alive",
-//     storageBucket: "gameapp-alive.appspot.com",
-//     messagingSenderId: "184451273275",
-//     appId: "1:184451273275:web:6cfb9405a329879fdac21e",
-//     measurementId: "G-Q8WHJF1QRV"
-//   };
-//   // Initialize Firebase
-//   firebase.initializeApp(firebaseConfig);
-//   firebase.analytics();
-// </script>
-
+export{
+  db
+}
 
 
 import ons from 'onsenui';

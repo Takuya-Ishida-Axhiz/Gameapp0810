@@ -29,7 +29,8 @@
                     <a href="" style="display: block;">
                     <li class="list-item list-item--chevron">
                         <div style="height: 76px;" class="list-item__center">
-                        きゃんゆう
+                        <p>{{ user.name }}</p>
+                        ユーザー名
                         </div>
                     </li>
                     </a>
@@ -66,8 +67,57 @@
 
 <script>
 import app from './App';
+import firebase from 'firebase';
+import {db} from 'main.js';
 
 export default {
+
+    data(){
+        return {
+            user :　[]
+        }
+    },
+
+    mounted(){
+    //   db.collection("users").get()
+    //   .then((querySnapshot) => {
+    //     querySnapshot.forEach((doc) => {
+    //       this.users.push(doc.data())
+    //     })
+    //   console.log(this.users)
+    //   })
+
+      const usersRef = db.collection("users")
+      const tokidoRef = usersRef.doc('Eh07eny2Tk0yK0zu1Ozn')
+    //   tokidoRef.get()
+    //   .then(function(doc) {
+    //         if (doc.exists) {
+    //             console.log("Document data:", doc.data());
+    //             this.user.push(doc.data());
+    //             console.log(user.name)
+    //         } else {
+    //             // doc.data() will be undefined in this case
+    //             console.log("No such document!");
+    //         }
+    //     }).catch(function(error) {
+    //         console.log("Error getting document:", error);
+    //     });
+
+        tokidoRef.get()
+        .then
+        (docSnapshot => {
+        console.log(docSnapshot.data())
+        this.user.push(docSnapshot.data());
+        console.log(user.data())
+
+        })
+
+    },
+    
+
+
+
+
     methods: {
       pop() {
         this.pageStack.pop();
