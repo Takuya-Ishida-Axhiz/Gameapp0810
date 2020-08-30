@@ -6,9 +6,15 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
+
+import { firestorePlugin } from 'vuefire' 
+
 import firebaseui from 'firebaseui-ja'
 import 'firebaseui-ja/dist/firebaseui.css'
-// import router from './router.js';
+import router from './router.js';
+
+Vue.use(firestorePlugin)
+
 
 
 Vue.config.productionTip = false
@@ -26,10 +32,14 @@ var config = {
 }
 firebase.initializeApp(config)
 const db = firebase.firestore();
+const auth = firebase.auth();
 
 export{
-  db
+  db,
+  auth
 }
+
+
 
 
 import ons from 'onsenui';
@@ -49,5 +59,6 @@ Vue.use(VueOnsen);
 new Vue({
   el: '#app',
   template: '<app></app>',
+  router,
   components:{App}
 });

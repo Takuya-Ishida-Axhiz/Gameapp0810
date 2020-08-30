@@ -1,21 +1,34 @@
 <template>
     <div id="firebaseui-auth-container">
+    <button @click="logout()" >ログアウト</button>
     </div>
+
 </template>
 
 <script>
 import firebase from "firebase";
-import firebaseui from "firebaseui/firebaseui__ja";
-import "firebaseui/firebaseui.css";
+import {db} from 'main.js';
+
+
 
 export default {
-    mounted() {
+
+    data(){
+      return{
+        currentUser:{},
+        // user: db.collection('users').doc(this.currentUser.uid)
+      }
+    },
+
+  created() {
     //----------------------------------------------
     // Firebase UIの設定
     //----------------------------------------------
     var uiConfig = {
         // ログイン完了時のリダイレクト先
-        signInSuccessUrl: '/auth/multi/',
+        signInSuccessUrl: 'http://localhost:8080',
+        signInFlow: 'popup',
+
 
         // 利用する認証機能
         signInOptions: [
@@ -39,28 +52,45 @@ export default {
     firebase.auth().onAuthStateChanged( (user) => {
       // ログイン済み
       if(user) {
-        showLogin('Login Complete!', `${user.displayName}さんがログインしました<br>(${user.uid})`);
         console.log(user);
+        this.currentUser = user
+        // this.createUser(user)
+        
       }
       // 未ログイン
       else {
-        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        var ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(firebase.auth())
         ui.start('#firebaseui-auth-container', uiConfig);
+        
       }
     });
 
     //----------------------------------------------
-    // ログアウト
+    // ログアウト (下記methods内に記載) 
     //----------------------------------------------
-    document.querySelector('#logout').addEventListener("click", ()=>{
-      firebase.auth().signOut().then(()=>{
-          showLogout("Firebase Auth Sample", "");
-        })
-        .catch( (error)=>{
-          alert(`ログアウトできませんでした(${error})`);
-        });
-    })
+
+    
+  },
+
+
+    methods: {
+        logout() {
+        // ログアウト処理
+        firebase.auth().signOut();
+        },
+
+        createUser (user) {
+        db.collection('users').doc(user.uid).set({
+        'name': user.displayName,
+        'email':user.email
+        }, { merge: true })
+}
     },
+
+    components:{
+        db
+    },
+
 
     props: ["config"]
 }

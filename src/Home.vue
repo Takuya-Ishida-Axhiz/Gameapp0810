@@ -1,127 +1,118 @@
-     <!-- ホーム＞フォローのページ -->
-      <template id="home_follow.html">
-        <ons-page id="home_follow">
+<template>
+<v-ons-page>
+<div>
+  <Login></Login>
+  <div>
+    <!-- <li v-for="myTweet in myTweets" :key="user_id" > -->
+      <!-- {{myTweet.tweet}} -->
+    <!-- </li> -->
 
-          <div class="tabbarArea">空のタブバー</div>
+    <!-- <li v-for="myTweet in orderBy(myTweets,'date',-1)" :key="myTweet.id"> <!-- 'v-for'の中身を変更-->
+      <!-- {{ myTweet.tweet }} -->
+    <!-- </li> --> -->
+   
+  </div>
+  <p>AAAAA</p>
+  <!-- <p>{{ currentUser }}</p> -->
+  
+  <p>{{ uid }}</p>
+  <!-- <p>{{ currentUser.uid }}</p> -->
+  <!-- <button @click='toMypage'></button> -->
+  
+</div>
+</v-ons-page>
 
-        <!-- 投稿追加ボタン -->
-        <ons-fab position="bottom right" class="btn-addpost" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-post.html')">
-            <i class="fas fa-plus"></i>
-        </ons-fab>
+</template>
 
-          <div class="userlist follow">
-            <div class="user online">
-              <img src="img/followIcon.png" alt="" class="user-img">
-            </div>
-            <div class="user offline">
-              <img src="img/followIcon.png" alt="">
-            </div>
-            <div class="user online">
-              <img src="img/followIcon.png" alt="">
-            </div>
-            <div class="user online">
-              <img src="img/followIcon.png" alt="">
-            </div>
-            <div class="user online">
-              <img src="img/followIcon.png" alt="">
-            </div>
-            <div class="user offline">
-              <img src="img/followIcon.png" alt="">
-            </div>
-          </div>
-          <!-- followUserlist -->
 
-          <!-- タイムライン表示 -->
-          <div class="timeline follow">
-            <div class="ttlBox">
-              <div class="ttl">タイムライン</div>
-              <div class="sort"　tappable modifier="longdivider" onclick="ons.openActionSheet({ buttons: ['最新順', 'いいね順', '超いいね順', 'フォロワー順', 'Cancel'], cancelable: true })">最新順</div>
-            </div>
-            <!-- ttlBox -->
+<script>
+import Login from 'Login'
 
-            <div class="tlContents follow">
+import firebase from "firebase";
+import {db} from 'main.js';
+import 'firebase/auth';    
+import Vue2Filters from 'vue2-filters'  
 
-              <div class="item" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-detail.html')">
-                  <div class="imgBox"><img src="img/tlImg.png" alt=""></div>
-                <div class="txtBox">僕は蠱毒使いにはスタミナ系と攻撃系の旋律を優先…</div>
-                <div class="userBox">
-                  <div class="icon"><img src="img/tlUser.png" alt=""></div>
-                  <div class="name">ふぇぐ</div>
-                  <div class="nice">
-                    <i class="fas fa-heart"></i>
-                  </div>
-                  <!-- nice -->
-                  <div class="retweet" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-retweet.html')">
-                    <i class="fas fa-retweet"></i>
-                  </div>
-                  <!-- retweet -->
-                </div>
-                <!-- userBox -->
-              </div>
-              <!-- item -->
+export default {
+  name:'home',
+  components:{
+    Login
+  },
 
-              <div class="item" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-detail.html')">
-                <div class="imgBox"><img src="img/tlImg.png" alt=""></div>
-                <div class="txtBox">僕は蠱毒使いにはスタミナ系と攻撃系の旋律を優先…</div>
-                <div class="userBox">
-                  <div class="icon"><img src="img/tlUser.png" alt=""></div>
-                  <div class="name">ふぇぐ</div>
-                  <div class="nice">
-                    <i class="fas fa-heart"></i>
-                  </div>
-                  <!-- nice -->
-                  <div class="retweet">
-                    <i class="fas fa-retweet"></i>
-                  </div>
-                  <!-- retweet -->
-                </div>
-                <!-- userBox -->
-              </div>
-              <!-- item -->
+  // props:[
+  //   'currentUser'
+  // ],
 
-              <div class="item" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-detail.html')">
-                <div class="imgBox"><img src="img/tlImg.png" alt=""></div>
-                <div class="txtBox">僕は蠱毒使いにはスタミナ系と攻撃系の旋律を優先…</div>
-                <div class="userBox">
-                  <div class="icon"><img src="img/tlUser.png" alt=""></div>
-                  <div class="name">ふぇぐ</div>
-                  <div class="nice">
-                    <i class="fas fa-heart"></i>
-                  </div>
-                  <!-- nice -->
-                  <div class="retweet">
-                    <i class="fas fa-retweet"></i>
-                  </div>
-                  <!-- retweet -->
-                </div>
-                <!-- userBox -->
-              </div>
-              <!-- item -->
+  data(){
+    return{
+      currentUser:{}, 
+      uid:[],
+      myTweets:'',
+      tweets:{}
+    }
+  },
 
-              <div class="item" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-detail.html')">
-                <div class="imgBox"><img src="img/tlImg.png" alt=""></div>
-                <div class="txtBox">僕は蠱毒使いにはスタミナ系と攻撃系の旋律を優先…</div>
-                <div class="userBox">
-                  <div class="icon"><img src="img/tlUser.png" alt=""></div>
-                  <div class="name">ふぇぐ</div>
-                  <div class="nice">
-                    <i class="fas fa-heart"></i>
-                  </div>
-                  <!-- nice -->
-                  <div class="retweet">
-                    <i class="fas fa-retweet"></i>
-                  </div>
-                  <!-- retweet -->
-                </div>
-                <!-- userBox -->
-              </div>
-              <!-- item -->
+  
 
-            </div>
-            <!-- contents -->
-          </div>
-          <!-- timeline -->
 
-        </ons-page>
-      </template>
-      <!-- home_follow.html -->
+  created() {
+    firebase.auth().onAuthStateChanged( (user) => {
+        this.uid = user.uid
+        this.GetMyTweet()
+  })
+  },
+
+  // firestore(){
+  //   return{
+  //     // myTweets: db.collection("tweets").where("uid", "==",this.uid)
+  //   }
+  // },
+
+  methods:{
+
+    // GetMyTweet(){
+    //   db.collection("tweets").where('uid','==',this.uid)
+    //   .get()
+    //   .then(function(querySnapshot) {
+    //       querySnapshot.forEach(function(doc) {
+    //           // doc.data() is never undefined for query doc snapshots
+    //           console.log(doc.id, " => ", doc.data());
+    //       });
+    //   })
+    //   .catch(function(error) {
+    //       console.log("Error getting documents: ", error);
+    //   });
+
+    // },
+
+    GetMyTweet(){
+      db.collection("tweets").where("uid", "==",this.uid).get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            this.myTweets.push(doc.data())
+          })
+          console.log(this.myTweets)
+        })
+
+
+  },
+
+  mounted(){
+      // db.collection("tweets").where("uid", "==",this.uid).get()
+      // .then((querySnapshot) => {
+      //   querySnapshot.forEach((doc) => {
+      //     this.myTweets.push(doc.data())
+      //   })
+      //   console.log(this.myTweets)
+      // })
+  },
+
+  mixins: [Vue2Filters.mixin] 
+}
+</script>
+
+
+
+<style>
+
+</style>

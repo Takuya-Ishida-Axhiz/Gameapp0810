@@ -15,22 +15,21 @@
             <div class="mypage-maincontents">
                 <div class="gray-back">
                 <div class="mypage-thum">
-                    <img class="thumImg" src="/www/img/tlImg.png" alt="" />
+                    <img class="thumImg" src="./img/tlImg.png" alt="" />
                     <!-- /www/img/tlImg.png -->
                 </div>
                 <div class="mypage-icon-wrapper">
                     <div class="mypage-icon-circle">
-                    <img class="mypage-icon-img" src="/www/img/tlImg.png" alt="" />
+                    <img class="mypage-icon-img" src="./img/tlImg.png" alt="" />
                     <!-- /www/img/tlImg.png -->
                     </div>
                 </div>
-                <div class="mypage-subttl">ユーザ名</div>
+                <div class="mypage-subttl">ユーザー名</div>
                 <ul class="list">
                     <a href="" style="display: block;">
                     <li class="list-item list-item--chevron">
                         <div style="height: 76px;" class="list-item__center">
-                        <p>{{ user.name }}</p>
-                        ユーザー名
+                            <p>{{ name }}</p>
                         </div>
                     </li>
                     </a>
@@ -43,16 +42,7 @@
                         style="height: auto; padding-right: 25px; font-size: 14px;"
                         class="list-item__center"
                         >
-                        きゃんゆうといいます<br />やかましい音楽が好きです<br /><br />
-                        きゃんゆうといいますやかましい音楽が好きです<br />
-                        きゃんゆうといいますやかましい音楽が好きです<br />
-                        きゃんゆうといいますやかましい音楽が好きです<br />
-                        きゃんゆうといいますやかましい音楽が好きです<br />
-                        きゃんゆうといいますやかましい音楽が好きです<br />
-                        きゃんゆうといいますやかましい音楽が好きです<br />
-                        きゃんゆうといいますやかましい音楽が好きです<br />
-                        きゃんゆうといいますやかましい音楽が好きです<br />
-                        きゃんゆうといいますやかましい音楽が好きです
+                        {{ profile }}
                         </div>
                     </li>
                     </a>
@@ -62,56 +52,48 @@
         </div>
     </div>
     <!-- /main -->
-  </v-ons-page>
+</v-ons-page>
 </template>
 
 <script>
+
 import app from './App';
 import firebase from 'firebase';
 import {db} from 'main.js';
 
 export default {
+ 
 
     data(){
         return {
-            user :　[]
+            name:'',
+            email:'',
+            profile:'',
+            photoURL:'',
+            tel:'',
+
+            uid:[]
         }
     },
 
-    mounted(){
-    //   db.collection("users").get()
-    //   .then((querySnapshot) => {
-    //     querySnapshot.forEach((doc) => {
-    //       this.users.push(doc.data())
-    //     })
-    //   console.log(this.users)
-    //   })
 
-      const usersRef = db.collection("users")
-      const tokidoRef = usersRef.doc('Eh07eny2Tk0yK0zu1Ozn')
-    //   tokidoRef.get()
-    //   .then(function(doc) {
-    //         if (doc.exists) {
-    //             console.log("Document data:", doc.data());
-    //             this.user.push(doc.data());
-    //             console.log(user.name)
-    //         } else {
-    //             // doc.data() will be undefined in this case
-    //             console.log("No such document!");
-    //         }
-    //     }).catch(function(error) {
-    //         console.log("Error getting document:", error);
-    //     });
 
-        tokidoRef.get()
-        .then
-        (docSnapshot => {
-        console.log(docSnapshot.data())
-        this.user.push(docSnapshot.data());
-        console.log(user.data())
 
-        })
-
+    created(){
+        firebase.auth().onAuthStateChanged( (user) => {
+        // ログイン済み
+        if(user) {
+            this.uid = user.uid
+            this.GetUserData()
+            
+        }
+        // 未ログイン
+        else {
+            var ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(firebase.auth())
+            ui.start('#firebaseui-auth-container', uiConfig);
+            
+        }
+        })  
     },
     
 
@@ -121,7 +103,20 @@ export default {
     methods: {
       pop() {
         this.pageStack.pop();
-      } 
+      },
+
+      GetUserData(){
+            let s = this
+            db.collection("users").doc(this.uid).get()
+            .then(function(doc) {
+            console.log(doc.data())　//取れてる
+ 
+            s.name = doc.data().name　
+            s.email = doc.data().email
+            s.profile = doc.data().profile
+            s.photoURL= doc.data().photoURL
+            s.tel= doc.data().tel
+        })}
     },
     props: ['pageStack'],
     components: {  },
