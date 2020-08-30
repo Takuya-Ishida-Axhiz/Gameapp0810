@@ -58,7 +58,7 @@ export default {
   created() {
     firebase.auth().onAuthStateChanged( (user) => {
         this.uid = user.uid
-        this.GetMyTweet()
+        // this.GetMyTweet()
   })
   },
 
@@ -86,25 +86,34 @@ export default {
     // },
 
     GetMyTweet(){
-      db.collection("tweets").where("uid", "==",this.uid).get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            this.myTweets.push(doc.data())
-          })
-          console.log(this.myTweets)
-        })
+      let s = this
+      db.collection("tweets").where("uid", "==",this.uid)
+      .get()
+      .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+            
+              // doc.data() is never undefined for query doc snapshots
+              console.log(doc.id, " => ", doc.data());
+              s.myTweets.push(doc.data().tweet)
+          });
+          console.log(myTweets)
+      })
+      .catch(function(error) {
+          console.log("Error getting documents: ", error);
+      });
+      }
 
 
   },
 
   mounted(){
-      // db.collection("tweets").where("uid", "==",this.uid).get()
-      // .then((querySnapshot) => {
-      //   querySnapshot.forEach((doc) => {
-      //     this.myTweets.push(doc.data())
-      //   })
-      //   console.log(this.myTweets)
-      // })
+      db.collection("tweets").where("uid", "==",this.uid).get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          this.myTweets.push(doc.data())
+        })
+        console.log(this.myTweets)
+      })
   },
 
   mixins: [Vue2Filters.mixin] 
