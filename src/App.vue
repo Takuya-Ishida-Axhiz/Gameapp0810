@@ -50,10 +50,7 @@ export default {
   },
 
   data() {
-    return {
-      username:'takuya',
-      currentUser:{},
-      
+    return {   
       activeIndex: 0,
       tabs: [
             {
@@ -77,7 +74,7 @@ export default {
             },
             {
               icon: this.md() ? null : 'ion-ios-MypageNavi',
-              label: 'Mypage',
+              label: 'マイページ',
               page: MypageNavi
             },
             {

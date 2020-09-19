@@ -1,11 +1,11 @@
 <template>
   <v-ons-page>
     <div class="main">
-      <!-- スマホ用ヘッダー部 -->
-      <div class="dummyheader"></div>
+      <!-- スマホ用ヘッダー部 　被ってたので消しました。-->
+      <!-- <div class="dummyheader"></div>
       <ons-toolbar class="mypageheader">
         <div class="center">マイページ</div>
-      </ons-toolbar>
+      </ons-toolbar> -->
       
       <!-- スマホ用ヘッダー部  end-->
       <div class="mypage-maincontents">

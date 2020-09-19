@@ -1,0 +1,2767 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Alive</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="">
+  <meta property="og:title" content="Alive">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="#">
+  <meta property="og:image" content="img/meta/og-image.png">
+  <meta property="og:site_name" content="Alive">
+  <meta property="og:description" content="">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="canonical" href="#">
+  <!-- <link rel="apple-touch-icon" href="img/meta/touch-icon.png"> -->
+  <!-- <link rel="shortcut icon" href="img/meta/favicon.ico"> -->
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/reset.css"> <!-- <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css"> -->
+  <link rel="stylesheet" href="css/onsenui.css">
+  <link rel="stylesheet" href="css/onsen-css-components.css">
+  <!-- <link rel="stylesheet" href="css/onsenui_customize.css"> -->
+  <!-- <link rel="stylesheet" href="css/onsen-css-components_customize.css"> -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script> -->
+  <script src="js/onsenui.js"></script>
+  <link rel="stylesheet" href="components/loader.css">
+  <script src="components/loader.js"></script>
+  <script src="js/onsenui.js"></script>
+
+
+</head>
+
+<body>
+
+  <ons-navigator swipeable id="myNavigator" page="main.html"></ons-navigator>
+
+  <template id="main.html">
+    <ons-page>
+
+      <ons-toolbar>
+        <div class="center">ホーム</div>
+      </ons-toolbar>
+
+      <!-- ログイン／新規登録ボタン -->
+      <div class="login-btn-area">
+        <ons-button class="btn-login">ログイン</ons-button>
+        <ons-button class="btn-entry">新規登録</ons-button>
+      </div>
+      <!-- login-btn-area -->
+
+      <!-- フッタータブバー定義 -->
+      <div class="menuLower">
+        <ons-tabbar swipeable position="auto">
+
+          <ons-tab page="home.html" label="ホーム" icon="fa-home" badge=" " active>
+          </ons-tab>
+
+          <ons-tab page="room.html" label="ルーム" icon="fa-campground" badge=" ">
+          </ons-tab>
+
+          <ons-tab page="talk.html" label="トーク" icon="fa-comments" badge=" ">
+          </ons-tab>
+
+          <ons-tab page="mypage.html" label="マイページ" icon="fa-user">
+          </ons-tab>
+
+        </ons-tabbar>
+      </div>
+      <!-- menuLower -->
+
+    </ons-page>
+  </template>
+  <!-- main.html -->
+
+  <!-- フッタータブバー ホーム画面(tab1) -->
+  <template id="home.html">
+    <ons-page id="home">
+      <ons-toolbar>
+        <!-- <div class="center">Tab 1</div> -->
+      </ons-toolbar>
+
+      <div class="menuUpper">
+      <!-- menuUpper -->
+
+        <!-- searchArea -->
+        <div class="searchArea">
+          <div class="myicon">
+            <img src="img/myIcon.png" alt="">
+          </div>
+
+              <ons-search-input
+                placeholder="キーワードでさがす"
+                onchange="ons.notification.alert('Searched for: ' + this.value)" onclick="document.getElementById('myNavigator').pushPage('home_search.html')"></ons-search-input>
+
+          <div class="searchOption">
+            <img src="img/iconSearchOption.png" alt="" onclick="document.getElementById('myNavigator').pushPage('home_search_filter.html')">
+          </div>
+          <div class="news" onclick="document.getElementById('myNavigator').pushPage('home_news.html')">
+            <img src="img/IconNews.png" alt="">
+          </div>
+          <!-- news -->
+        </div>
+        <!-- searchArea -->
+
+        <!-- ホーム内タブバー -->
+        <ons-tabbar swipeable position="top" tab-border>
+          <!-- フッターホーム＞フォロー -->
+          <ons-tab page="home_follow.html" label="フォロー" icon="" badge="" class="follow" active>
+          </ons-tab>
+          <!-- home_follow.html -->
+
+          <!-- フッターホーム＞フレンド -->
+          <ons-tab page="home_friend.html" label="フレンド" icon="">
+          </ons-tab>
+          <!-- home_friend.html -->
+
+          <!-- フッターホーム＞ルーム -->
+          <ons-tab page="home_room.html" label="ルーム" icon="">
+          </ons-tab>
+          <!-- home_room.html -->
+
+          <!-- フッターホーム＞イベント -->
+          <ons-tab page="home_event.html" label="イベント" icon="">
+          </ons-tab>
+          <!-- home_event.html -->
+
+          <!-- フッターホーム＞フォロワー -->
+          <ons-tab page="home_follower.html" label="フォロワー" icon="">
+          </ons-tab>
+          <!-- home_follower.html -->
+
+        </ons-tabbar>
+        <!-- /ons-tabbar -->
+
+        <!-- テンプレート -->
+        <!-- 検索ボックスクリック時画面 -->
+        <template id="home_search.html">
+          <ons-page id="home_search">
+            <ons-toolbar>
+              <div class="left">
+                <ons-back-button></ons-back-button>
+              </div>
+              <div class="center search-box">
+                <ons-search-input
+                placeholder="キーワードでさがす"
+                onchange="ons.notification.alert('Searched for: ' + this.value)"></ons-search-input>
+              <div class="searchOption" onclick="document.getElementById('myNavigator').pushPage('home_search_filter.html')">
+                <img src="img/iconSearchOption.png" alt="">
+              </div>
+            </div>
+            <!-- center,search-box -->
+            </ons-toolbar>
+
+            <div class="contents">
+              <div class="feature-game">
+                <div class="outer">
+                  <div class="title-outer">
+                    <div class="title">注目のゲーム</div>
+                    <div class="view-all"><i class="fas fa-chevron-right"></i>すべて見る</div>
+                  </div>
+                  <ul class="list line1">
+                    <li class="list-item"></li>
+                  </ul>
+                  <ul class="list line2">
+                    <li class="list-item"></li>
+                    <li class="list-item"></li>
+                  </ul>
+                </div>
+                <!-- outer -->
+              </div>
+              <!-- feature-game -->
+
+              <div class="ranking-game">
+                <div class="outer">
+                  <div class="title-outer">
+                    <div class="title">人気ランキング</div>
+                    <div class="view-all"><i class="fas fa-chevron-right"></i>すべて見る</div>
+                  </div>
+                </div>
+                <!-- outer -->
+              </div>
+              <!-- ranking-game -->
+
+              <div class="popularity-room">
+                <div class="outer">
+                  <div class="title-outer">
+                    <div class="title">人気のルーム</div>
+                    <div class="view-all"><i class="fas fa-chevron-right"></i>すべて見る</div>
+                  </div>
+                </div>
+                <!-- outer -->
+              </div>
+              <!-- popularity-room -->
+            </div>
+            <!-- contents -->
+          </ons-page>
+        </template>
+        <!-- home_search.html -->
+
+        <!-- 検索絞り込み -->
+        <template id="home_search_filter.html">
+          <ons-page id="home_search_filter">
+            <ons-toolbar>
+              <div class="left">
+                <ons-back-button></ons-back-button>
+              </div>
+              <div class="center">絞り込み</div>
+            </ons-toolbar>
+
+            <div class="search-box">
+            <ons-search-input
+              placeholder="キーワードでさがす"
+              onchange="ons.notification.alert('Searched for: ' + this.value)"></ons-search-input>
+            </div>
+            <!-- search-outer -->
+
+            <ul class="list">
+              <!-- ゲーム名 -->
+              <li class="list-item add-title">
+                <div class="list-item__left">
+                  <div class="title">ゲーム名</div>
+                </div>
+                <!-- list-item__left -->
+                <div class="list-item__right">
+                  <div class="title-select">アズールレーン</div>
+                  <button class="btn-addgame"><img src="img/icon_plus_small.png" alt=""></button>
+                </div>
+                <!-- list-item__right -->
+              </li>
+              <!-- list-item, add-title -->
+
+              <!-- ゲームジャンル -->
+              <li class="list-item type">
+                <div class="list-item__left">
+                  <div class="title">ゲームジャンル</div>
+                </div>
+                <!-- list-item__left -->
+                <div class="list-item__right">
+                  <select class="select-input title-select">
+                    <option>シューティングゲーム</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                  </select>
+                </div>
+                <!-- list-item__right -->
+              </li>
+              <!-- list-item, type -->
+
+              <li class="list-item gender">
+                <div class="list-item__left">
+                  <div class="title">性別</div>
+                </div>
+                <!-- list-item__left -->
+                <div class="list-item__right">
+                  <select class="select-input title-select">
+                    <option>指定しない</option>
+                    <option>男性</option>
+                    <option>女性</option>
+                  </select>
+                </div>
+                <!-- list-item__right -->
+              </li>
+              <!-- list-item, gender -->
+            </ul>
+
+            <div class="btn-outer">
+              <ons-button class="btn-search" onclick="document.getElementById('myNavigator').pushPage('home_search_result.html')">この条件で検索する</ons-button>
+            </div>
+          </ons-page>
+        </template>
+        <!-- home_search_filter.html -->
+
+        <!-- 検索結果表示 -->
+        <template id="home_search_result.html">
+          <ons-page id="home_search_result">
+            <ons-toolbar>
+              <div class="left">
+                <ons-back-button></ons-back-button>
+              </div>
+              <div class="center search-box">
+                <ons-search-input
+                placeholder="キーワードでさがす"
+                onchange="ons.notification.alert('Searched for: ' + this.value)"></ons-search-input>
+              <div class="searchOption" onclick="document.getElementById('myNavigator').pushPage('home_search_filter.html')">
+                <img src="img/iconSearchOption.png" alt="">
+              </div>
+              </div>
+              <!-- center,search-box -->
+            </ons-toolbar>
+
+            <!-- 検索結果＞タブバー -->
+            <div class="home_search_result_tabbar">
+              <ons-tabbar swipeable position="top" tab-border>
+
+                <ons-tab page="home_search_result_room.html" label="ルーム" icon="" badge="" active>
+                </ons-tab>
+                <!-- home_search_result_room.html -->
+
+                <ons-tab page="home_search_result_event.html" label="イベント" icon="" badge="">
+                </ons-tab>
+                <!-- home_search_result_event.html -->
+
+                <ons-tab page="home_search_result_user.html" label="ユーザー" icon="">
+                </ons-tab>
+                <!-- search_result_user.html -->
+
+              </ons-tabbar>
+            </div>
+            <!-- home_search_result_tabbar -->
+
+            <!-- 検索結果＞ルーム -->
+            <template id="home_search_result_room.html">
+              <ons-page id="home_search_result_room">
+
+              <div class="content">
+                <!-- 検索結果表示 -->
+                <div class="result">
+                  <ul class="list">
+                    <li class="list-item list-item--chevron list-item--tappable">
+                      <div class="list-item__left">
+                        <img class="list-item__thumbnail" src="img/home_room_item.png" alt="">
+                      </div>
+                      <!-- list-item__left -->
+
+                      <div class="list-item__center">
+                        <div class="gametitle_outer">
+                          <div class="gametitle">モンスターハンター</div>
+                          <div>
+                            <i class="fas fa-chevron-right"></i>
+                          </div>
+                        </div>
+                        <!-- gametitle-outer -->
+                        <div class="roomname">【総合】モンスターハンター：ワールド</div>
+                        <div class="info_outer">
+                          <div class="member_outer">
+                            <div class="icon">
+                              <i class="fas fa-user"></i>
+                            </div>
+                            <div class="number">121282</div>
+                          </div>
+                          <!-- member-outer -->
+                          <div class="time_outer">
+                            <div class="icon"><i class="far fa-clock"></i></div>
+                            <div class="time">10分前</div>
+                          </div>
+                          <!-- time-outer -->
+                        </div>
+                        <!-- list-item__info-outer -->
+                      </div>
+                      <!-- list-item__center -->
+                    </li>
+                    <!-- list-item -->
+
+                    <li class="list-item list-item--chevron list-item--tappable">
+                      <div class="list-item__left">
+                        <img class="list-item__thumbnail" src="img/home_room_item.png" alt="">
+                      </div>
+                      <!-- list-item__left -->
+                      <div class="list-item__center">
+                        <div class="gametitle_outer">
+                          <div class="gametitle">モンスターハンター</div>
+                          <div>
+                            <i class="fas fa-chevron-right"></i>
+                          </div>
+                        </div>
+                        <!-- gametitle-outer -->
+                        <div class="roomname">【総合】モンスターハンター：ワールド</div>
+                        <div class="info_outer">
+                          <div class="member_outer">
+                            <div class="icon">
+                              <i class="fas fa-user"></i>
+                            </div>
+                            <div class="number">121282</div>
+                          </div>
+                          <!-- member-outer -->
+                          <div class="time_outer">
+                            <div class="icon"><i class="far fa-clock"></i></div>
+                            <div class="time">10分前</div>
+                          </div>
+                          <!-- time-outer -->
+                        </div>
+                        <!-- list-item__info-outer -->
+
+                      </div>
+                      <!-- list-item__center -->
+                    </li>
+                    <!-- list-item -->
+                  </ul>
+                </div>
+                <!-- result -->
+              </div>
+              <!-- content -->
+
+              </ons-page>
+            </template>
+            <!-- home_search_result_room.html -->
+
+            <!-- 検索結果＞イベント -->
+            <template id="home_search_result_event.html">
+              <ons-page id="home_search_result_event">
+
+              <div class="content">
+                <div class="result">
+                  <ul class="list">
+                    <li class="list-item list-item--chevron list-item--tappable">
+                      <div class="list-item__left">
+                        <img class="list-item__thumbnail" src="img/home_event_item.png" alt="">
+                      </div>
+                      <!-- list-item__left -->
+
+                      <div class="list-item__center">
+                        <div class="eventname">ロケットリーグ</div>
+                        <div class="prev-text">イベント内容イベント内容イベント内容</div>
+
+                        <div class="user_outer">
+                          <div class="icon">
+                            <img src="img/home_event_user.png" alt="">
+                          </div>
+                          <div class="name">remisora</div>
+                        </div>
+                        <!-- member-outer -->
+
+                      </div>
+                      <!-- list-item__center -->
+
+                    </li>
+                    <!-- list-item -->
+
+                    <li class="list-item list-item--chevron list-item--tappable">
+                      <div class="list-item__left">
+                        <img class="list-item__thumbnail" src="img/home_event_item.png" alt="">
+                      </div>
+                      <!-- list-item__left -->
+
+                      <div class="list-item__center">
+                        <div class="eventname">ロケットリーグ</div>
+                        <div class="prev-text">イベント内容イベント内容イベント内容</div>
+
+                        <div class="user_outer">
+                          <div class="icon">
+                            <img src="img/home_event_user.png" alt="">
+                          </div>
+                          <div class="name">remisora</div>
+                        </div>
+                        <!-- member-outer -->
+
+                      </div>
+                      <!-- list-item__center -->
+
+                    </li>
+                    <!-- list-item -->
+
+                  </ul>
+                </div>
+                <!-- result -->
+              </div>
+              <!-- content -->
+            </ons-page>
+          </template>
+            <!-- home_search_result_event.html -->
+
+            <!-- 検索結果＞ユーザー -->
+            <template id="home_search_result_user.html">
+              <ons-page id="home_search_result_user">
+                <div class="content">
+                  <!-- 検索結果 -->
+                  <div class="result">
+                    <ul class="list">
+                      <li class="list-item list-item--chevron list-item--tappable">
+                        <div class="list-item__left">
+                          <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                        </div>
+                        <!-- list-item__left -->
+
+                        <div class="list-item__center">
+                          <div class="text_outer">
+                            <div class="username">ユーザー名</div>
+                            <div>
+                              <i class="fas fa-chevron-right"></i>
+                            </div>
+                          </div>
+                          <div class="list-item__preText">最近TDMをやり始めた。パブジーは前シーズンスタートで、TDMほとんど触れてこなかったけど、楽しいわw。20キルできて喜んでたけれど、みんな20キルって普通なん？</div>
+                        </div>
+                        <!-- list-item__center -->
+
+                        <div class="list-item__right">
+                          <div class="date">7/01 12:00</div>
+                          <div class="badge-outer">
+                            <div class="badge notification">2</div>
+                          </div>
+                        </div>
+                      </li>
+                      <!-- list-item -->
+
+                      <li class="list-item list-item--chevron list-item--tappable">
+                        <div class="list-item__left">
+                          <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                        </div>
+                        <!-- list-item__left -->
+
+                        <div class="list-item__center">
+                          <div class="text_outer">
+                            <div class="username">ユーザー名</div>
+                            <div>
+                              <i class="fas fa-chevron-right"></i>
+                            </div>
+                          </div>
+                          <div class="list-item__preText">最近TDMをやり始めた。パブジーは前シーズンスタートで、TDMほとんど触れてこなかったけど、楽しいわw。20キルできて喜んでたけれど、みんな20キルって普通なん？</div>
+                        </div>
+                        <!-- list-item__center -->
+
+                        <div class="list-item__right">
+                          <div class="date">7/01 12:00</div>
+                          <div class="badge-outer">
+                            <div class="badge notification">2</div>
+                          </div>
+                        </div>
+                      </li>
+                      <!-- list-item -->
+
+                    </ul>
+                  </div>
+                  <!-- result -->
+                </div>
+                <!-- content -->
+              </ons-page>
+            </template>
+            <!-- home_search_result_user.html -->
+
+          </ons-page>
+        </template>
+        <!-- home_search_result.html -->
+
+        <!-- ホーム＞お知らせ／ニュースのページ -->
+        <template id="home_news.html">
+          <ons-page id="home_news">
+            <ons-toolbar>
+              <div class="left">
+                <ons-back-button></ons-back-button>
+              </div>
+              <div class="center">お知らせ</div>
+              <div class="right">すべて既読にする</div>
+            </ons-toolbar>
+
+            <div class="news_tabbar">
+              <ons-tabbar swipeable position="top" tab-border>
+                <!-- ホーム＞ニュース＞あなた宛 -->
+                <ons-tab page="home_news_foryou.html" label="あなた宛" icon="" badge="" active>
+                </ons-tab>
+                <!-- ホーム＞ニュース＞あなた宛 -->
+
+                <!-- ホーム＞ニュース＞運営から -->
+                <ons-tab page="home_news_system.html" label="ニュース" icon="">
+                </ons-tab>
+                <!-- ホーム＞ニュース＞運営から -->
+              </ons-tabbar>
+            </div>
+            <!-- news_tabbar -->
+
+            <!-- あなた宛ページ -->
+            <template id="home_news_foryou.html">
+              <ons-page id="home_news_foryou">
+
+                <ul class="list">
+                  <li class="list-item list-item--chevron list-item--tappable">
+                    <div class="list-item__left">
+                      <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                    </div>
+                    <!-- list-item__left -->
+
+                    <div class="list-item__center">
+                      <div class="text_outer">
+                        <div class="list-item__preText">⭐︎AkA⭐︎さんにフォローされました。</div>
+                        <div class="time">3分前</div>
+                    </div>
+                      <!-- text-outer -->
+                    </div>
+                    <!-- list-item__center -->
+                  </li>
+                </ul>
+              </ons-page>
+            </template>
+            <!-- home_news_foryou.html -->
+
+            <!-- ニュース（運営から） -->
+            <template id="home_news_system.html">
+              <ons-page id="home_news_system">
+
+                <ul class="list">
+                  <li class="list-item list-item--chevron list-item--tappable" onclick="document.getElementById('myNavigator').pushPage('home_news_system-detail.html')">
+                    <div class="list-item__center">
+                      <div class="text_outer">
+                        <div class="list-item__preText">【定期メンテナンスのお知らせ】<br>
+                          明日6月11日（木）AM3時から5時までの間、システムメンテンナスを行います。</div>
+                        <div class="time">3分前</div>
+                      </div>
+                      <!-- text-outer -->
+                    </div>
+                    <!-- list-item__center -->
+                  </li>
+
+                </ul>
+
+                <!-- ニュース（運営から）詳細 -->
+                <template id="home_news_system-detail.html">
+                  <ons-page id="home_news_system-detail">
+
+                    <ons-toolbar>
+                      <div class="left">
+                        <ons-back-button></ons-back-button>
+                      </div>
+                      <div class="center">【定期メンテナンスのお知らせ】</div>
+                    </ons-toolbar>
+
+                    <ul class="list">
+                      <li class="list-item">
+                        <!-- <div class="list-item__center"> -->
+                          <div class="time">3分前</div>
+                          <div class="title">【定期メンテナンスのお知らせ】</div>
+                          <div class="detail">いつもALiveをご利用いただきありがとうございます。<br><br>
+                            明日6月11日（木）AM3時から5時までの間、システムメンテンナスを行います。<br>
+                            メンテンナンス中は各種機能が使用できなくなりますので、あからじめご承知ください。<br><br>
+                            ご不便をおかけいたしますが、ご理解とご協力をお願いいたします。</div>
+                        <!-- </div> -->
+                        <!-- list-item__center -->
+                      </li>
+
+                    </ul>
+
+                  </ons-page>
+                  <!-- home_news_system-detail -->
+                </template>
+                <!-- home_news_system-detail.html -->
+
+              </ons-page>
+            </template>
+            <!-- home_news_system -->
+
+          </ons-page>
+        </template>
+        <!-- home_news.html -->
+
+        <!-- ホーム＞フォローのページ -->
+        <template id="home_follow.html">
+          <ons-page id="home_follow">
+
+            <div class="tabbarArea">空のタブバー</div>
+
+          <!-- 投稿追加ボタン -->
+          <ons-fab position="bottom right" class="btn-addpost" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-post.html')">
+              <i class="fas fa-plus"></i>
+          </ons-fab>
+
+            <div class="userlist follow">
+              <div class="user online">
+                <img src="img/followIcon.png" alt="" class="user-img" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-detail.html')">
+              </div>
+              <div class="user offline">
+                <img src="img/followIcon.png" alt="" class="user-img" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-detail.html')">
+              </div>
+              <div class="user online">
+                <img src="img/followIcon.png" alt="" class="user-img" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-detail.html')">
+              </div>
+              <div class="user offline">
+                <img src="img/followIcon.png" alt="" class="user-img" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-detail.html')">
+              </div>
+              <div class="user online">
+                <img src="img/followIcon.png" alt="" class="user-img" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-detail.html')">
+              </div>
+              <div class="user offline">
+                <img src="img/followIcon.png" alt="" class="user-img" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-detail.html')">
+              </div>
+            </div>
+            <!-- followUserlist -->
+
+            <!-- タイムライン表示 -->
+            <div class="timeline follow">
+              <div class="ttlBox">
+                <div class="ttl">タイムライン</div>
+                <div class="sort"　tappable modifier="longdivider" onclick="ons.openActionSheet({ buttons: ['最新順', 'いいね順', '超いいね順', 'フォロワー順', 'Cancel'], cancelable: true })">最新順</div>
+              </div>
+              <!-- ttlBox -->
+
+              <div class="tlContents follow">
+
+                <div class="item" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-detail.html')">
+                    <div class="imgBox"><img src="img/tlImg.png" alt=""></div>
+                  <div class="txtBox">僕は蠱毒使いにはスタミナ系と攻撃系の旋律を優先…</div>
+                  <div class="userBox">
+                    <div class="icon"><img src="img/tlUser.png" alt=""></div>
+                    <div class="name">ふぇぐ</div>
+                    <div class="nice">
+                      <i class="fas fa-heart"></i>
+                    </div>
+                    <!-- nice -->
+                    <div class="retweet" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-retweet.html')">
+                      <i class="fas fa-retweet"></i>
+                    </div>
+                    <!-- retweet -->
+                  </div>
+                  <!-- userBox -->
+                </div>
+                <!-- item -->
+
+                <div class="item" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-detail.html')">
+                  <div class="imgBox"><img src="img/tlImg.png" alt=""></div>
+                  <div class="txtBox">僕は蠱毒使いにはスタミナ系と攻撃系の旋律を優先…</div>
+                  <div class="userBox">
+                    <div class="icon"><img src="img/tlUser.png" alt=""></div>
+                    <div class="name">ふぇぐ</div>
+                    <div class="nice">
+                      <i class="fas fa-heart"></i>
+                    </div>
+                    <!-- nice -->
+                    <div class="retweet">
+                      <i class="fas fa-retweet"></i>
+                    </div>
+                    <!-- retweet -->
+                  </div>
+                  <!-- userBox -->
+                </div>
+                <!-- item -->
+
+                <div class="item" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-detail.html')">
+                  <div class="imgBox"><img src="img/tlImg.png" alt=""></div>
+                  <div class="txtBox">僕は蠱毒使いにはスタミナ系と攻撃系の旋律を優先…</div>
+                  <div class="userBox">
+                    <div class="icon"><img src="img/tlUser.png" alt=""></div>
+                    <div class="name">ふぇぐ</div>
+                    <div class="nice">
+                      <i class="fas fa-heart"></i>
+                    </div>
+                    <!-- nice -->
+                    <div class="retweet">
+                      <i class="fas fa-retweet"></i>
+                    </div>
+                    <!-- retweet -->
+                  </div>
+                  <!-- userBox -->
+                </div>
+                <!-- item -->
+
+                <div class="item" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-detail.html')">
+                  <div class="imgBox"><img src="img/tlImg.png" alt=""></div>
+                  <div class="txtBox">僕は蠱毒使いにはスタミナ系と攻撃系の旋律を優先…</div>
+                  <div class="userBox">
+                    <div class="icon"><img src="img/tlUser.png" alt=""></div>
+                    <div class="name">ふぇぐ</div>
+                    <div class="nice">
+                      <i class="fas fa-heart"></i>
+                    </div>
+                    <!-- nice -->
+                    <div class="retweet">
+                      <i class="fas fa-retweet"></i>
+                    </div>
+                    <!-- retweet -->
+                  </div>
+                  <!-- userBox -->
+                </div>
+                <!-- item -->
+
+              </div>
+              <!-- contents -->
+            </div>
+            <!-- timeline -->
+
+          </ons-page>
+        </template>
+        <!-- home_follow.html -->
+
+        <!-- ホーム＞フォロー＞タイムライン詳細 -->
+        <template id="home_follow_tl-detail.html">
+          <ons-page id="home_follow_tl-detail">
+            <ons-toolbar>
+              <div class="left">
+                <ons-back-button></ons-back-button>
+              </div>
+              <div class="center">ふぇぐ</div>
+            </ons-toolbar>
+
+            <ons-pull-hook id="pull-hook" threshold-height="200px">
+              <ons-icon id="pull-hook-icon" size="22px" class="pull-hook-content" icon="fa-arrow-down"></ons-icon>
+            </ons-pull-hook>
+
+            <ons-card>
+              <div class="img-outer">
+                <ons-carousel id="carousel" fullscreen swipeable auto-scroll overscrollable initial-index="0">
+                  <ons-carousel-item class="carousel-item" style="background-color: gray">
+                  <img src="img/home_follow_tl-detail.jpg" alt="">
+                  </ons-carousel-item>
+
+                  <ons-carousel-item class="carousel-item" style="background-color: #085078">
+                    <div class="color-tag">カルーセル2</div>
+                  </ons-carousel-item>
+
+                  <ons-carousel-item class="carousel-item" style="background-color: #D38312">
+                    <div class="color-tag">カルーセル3</div>
+                  </ons-carousel-item>
+                </ons-carousel>
+
+                <div class="dots">
+                  <span id="dot0" class="dot" onclick="fn.swipe(this)">
+                    &#9679;
+                  </span>
+                  <span id="dot1" class="dot" onclick="fn.swipe(this)">
+                    &#9675;
+                  </span>
+                  <span id="dot2" class="dot" onclick="fn.swipe(this)">
+                    &#9675;
+                  </span>
+                </div>
+                <!-- dots  カルーセル用 -->
+
+              </div>
+              <!-- img-outer -->
+
+              <div class="content-area">
+                <div class="user_follow">
+                  <div class="user_outer" onclick="document.getElementById('myNavigator').pushPage('home_otheruser.html')">
+                    <div class="icon">
+                      <img src="img/home_event_user.png" alt="">
+                    </div>
+                    <div class="name-time_outer">
+                      <div class="name_outer">
+                        <div class="name">remisora</div>
+                        <i class="fas fa-chevron-right"></i>
+                      </div>
+                      <div class="time">10分前</div>
+                    </div>
+                    <!-- name-time_outer -->
+                  </div>
+                  <!-- user-outer -->
+                  <ons-button class="btn-follow"><i class="fas fa-user-plus"></i>フォローする</ons-button>
+
+                  <div class="sub-menu" tappable modifier="longdivider" onclick="ons.openActionSheet({ buttons: ['リンクをコピー', 'フォローをやめる', 'Cancel'], cancelable: true })">
+                    <i class="fas fa-ellipsis-h"></i>
+                  </div>
+                  <!-- sub-menu -->
+
+                </div>
+                <!-- user_follow -->
+
+                <div class="prev-text" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-post.html')">もっと上がるけど、組んでないので分からないですが、どんな装備でしょう(･ω･三･ω･)ﾌﾝﾌﾝ
+                  ちなみに狩猟笛は攻撃特大のみ発動中です</div>
+                <div class="icon-area">
+                  <div class="item img row">
+                    <img src="img/icon_super_nice_inactive.png" alt="">
+                    <div class="count">10</div>
+                  </div>
+                  <div class="item font nice row">
+                    <i class="fas fa-heart"></i>
+                    <div class="count">15</div>
+                  </div>
+                  <div class="item font bookmark">
+                    <i class="fas fa-bookmark"></i>
+                  </div>
+                  <!-- <div class="item font comment row"> -->
+                  <div class="item font comment row" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-post_small.html')">
+                    <i class="far fa-comment"></i>
+                    <div class="count">1</div>
+                  </div>
+                  <div class="item font retweet" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-retweet.html')">
+                    <i class="fas fa-retweet"></i>
+                  </div>
+                  <div class="item font share"　id="share" tappable modifier="longdivider" onclick="ons.openActionSheet({ buttons: ['リンクをコピー',  'Cancel'], cancelable: true })">
+                    <i class="fas fa-share"></i>
+                  </div>
+                </div>
+                <!-- icon-ara -->
+
+                <div class="comment-more">コメント<span class="coutnt">1</span>件をすべて見る</div>
+              </div>
+              <!-- content-area -->
+            </ons-card>
+
+          </ons-page>
+          <!-- home_follow_tl-detail.html -->
+        </template>
+        <!-- home_follow_tl-detail.html -->
+
+        <!-- ホーム＞フォロー＞タイムライン＞投稿入力エリア（小） -->
+        <template id="home_follow_tl-post_small.html">
+          <ons-page id="home_follow_tl-post_small">
+            <ons-toolbar>
+              <div class="left">
+                <ons-back-button></ons-back-button>
+              </div>
+              <div class="center"></div>
+            </ons-toolbar>
+
+            <div class="post-contents">
+              <div class="text-outer">
+                <textarea class="textarea" rows="1" placeholder="コメントする"></textarea>
+                <ons-button modifier="quiet" class="expand" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-post.html')"><i class="fas fa-expand-arrows-alt"></i></ons-button>
+                <!-- <ons-button modifier="quiet" class="expand"><i class="fas fa-expand-alt"></i></ons-button> -->
+              </div>
+              <!-- text-outer -->
+            </div>
+            <!-- post-contents -->
+
+            <!-- 写真選択・投稿ボタンエリア -->
+            <div class="imgselect-post">
+              <ons-button modifier="quiet" class="cam"><i class="fas fa-camera cam"></i></ons-button>
+              <ons-button modifier="quiet" class="img"><i class="far fa-image img"></i></ons-button>
+              <ons-button modifier="quiet" class="post">投稿</ons-button>
+            </div>
+
+          </ons-page>
+        </template>
+        <!-- home_follow_tl-post_small.html -->
+
+        <!-- ホーム＞フォロー＞タイムライン＞新規投稿 -->
+        <template id="home_follow_tl-post.html">
+          <ons-page id="home_follow_tl-post">
+            <ons-toolbar>
+              <div class="left">
+                <ons-back-button></ons-back-button>
+              </div>
+              <div class="center">投稿</div>
+            </ons-toolbar>
+
+            <div class="post-contents">
+              <div class="text-outer">
+              <textarea class="textarea" rows="1" placeholder="コメントする"></textarea>
+              <div class="count-outer"><div class="count">0</div> / 200</div>
+              </div>
+              <!-- text-outer -->
+
+              <div class="prev-img">
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+              <!-- prev-img -->
+            </div>
+            <!-- post-contets -->
+
+            <!-- 写真選択・投稿ボタンエリア -->
+            <div class="imgselect-post">
+              <ons-button modifier="quiet" class="cam"><i class="fas fa-camera cam"></i></ons-button>
+              <ons-button modifier="quiet" class="img"><i class="far fa-image img"></i></ons-button>
+              <ons-button modifier="quiet" class="post">投稿</ons-button>
+            </div>
+
+          </ons-page>
+        </template>
+        <!-- home_follow_tl-post.html -->
+
+        <!-- ホーム＞フォロー＞タイムライン＞リツイート-->
+        <template id="home_follow_tl-retweet.html">
+          <ons-page id="home_follow_tl-retweet">
+            <ons-toolbar>
+              <div class="left">
+                <ons-back-button></ons-back-button>
+              </div>
+              <div class="center">リツイート</div>
+            </ons-toolbar>
+
+            <div class="post-contents">
+              <div class="text-outer">
+              <textarea class="textarea" rows="1" placeholder="コメントする"></textarea>
+              <div class="count-outer"><div class="count">0</div> / 200</div>
+              </div>
+              <!-- text-outer -->
+
+              <div class="prev-img">
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+              <!-- prev-img -->
+            </div>
+            <!-- post-contets -->
+
+            <!-- 写真選択・リツイートボタンエリア -->
+            <div class="imgselect-post">
+              <ons-button modifier="quiet" class="cam"><i class="fas fa-camera cam"></i></ons-button>
+              <ons-button modifier="quiet" class="img"><i class="far fa-image img"></i></ons-button>
+              <ons-button modifier="quiet" class="post">リツイート</ons-button>
+            </div>
+
+          </ons-page>
+        </template>
+        <!-- home_follow_tl-retweet.html -->
+
+        <!-- ホーム＞フレンドのページ -->
+        <template id="home_friend.html">
+          <ons-page id="home_friend">
+
+            <div class="tabbarArea">空のタブバー</div>
+            <div class="userlist friend">
+              <div class="user online" onclick="document.getElementById('myNavigator').pushPage('home_otheruser.html')">
+                <img src="img/friendIcon.png" alt="" class="user-img">
+              </div>
+              <div class="user offline" onclick="document.getElementById('myNavigator').pushPage('home_otheruser.html')">
+                <img src="img/friendIcon.png" alt="">
+              </div>
+              <div class="user online" onclick="document.getElementById('myNavigator').pushPage('home_otheruser.html')">
+                <img src="img/friendIcon.png" alt="" class="user-img">
+              </div>
+              <div class="user offline" onclick="document.getElementById('myNavigator').pushPage('home_otheruser.html')">
+                <img src="img/friendIcon.png" alt="">
+              </div>
+            </div>
+            <!-- friendlist -->
+
+            <!-- タイムライン表示 -->
+            <div class="timeline friend">
+              <div class="ttlBox">
+                <div class="ttl">タイムライン</div>
+                <div class="sort"　tappable modifier="longdivider" onclick="ons.openActionSheet({ buttons: ['最新順', 'いいね順', '超いいね順', 'フォロワー順', 'Cancel'], cancelable: true })">最新順</div>
+              </div>
+
+              <div class="tlContents friend">
+
+                <ul class="list">
+                  <li class="list-item list-item--chevron list-item--tappable">
+                    <div class="list-item__left">
+                      <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                    </div>
+                    <!-- list-item__left -->
+
+                    <div class="list-item__center">
+                      <div class="text_outer">
+                        <div class="username">ユーザー名</div>
+                        <div>
+                          <i class="fas fa-chevron-right"></i>
+                        </div>
+                      </div>
+                      <div class="list-item__preText">最近TDMをやり始めた。パブジーは前シーズンスタートで、TDMほとんど触れてこなかったけど、楽しいわw。20キルできて喜んでたけれど、みんな20キルって普通なん？</div>
+                    </div>
+                    <!-- list-item__center -->
+
+                    <div class="list-item__right">
+                      <div class="date">7/01 12:00</div>
+                      <div class="badge-outer">
+                        <div class="badge notification">2</div>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- list-item -->
+
+                  <li class="list-item list-item--chevron list-item--tappable">
+                    <div class="list-item__left">
+                      <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                    </div>
+                    <!-- list-item__left -->
+
+                    <div class="list-item__center">
+                      <div class="text_outer">
+                        <div class="username">ユーザー名</div>
+                        <div>
+                          <i class="fas fa-chevron-right"></i>
+                        </div>
+                      </div>
+                      <div class="list-item__preText">最近TDMをやり始めた。パブジーは前シーズンスタートで、TDMほとんど触れてこなかったけど、楽しいわw。20キルできて喜んでたけれど、みんな20キルって普通なん？</div>
+                    </div>
+                    <!-- list-item__center -->
+
+                    <div class="list-item__right">
+                      <div class="date">7/01 12:00</div>
+                      <div class="badge-outer">
+                        <div class="badge notification">2</div>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- list-item -->
+
+                </ul>
+
+              </div>
+              <!-- tlContents -->
+            </div>
+            <!-- timeline -->
+
+          </ons-page>
+        </template>
+        <!-- home_friend.html -->
+
+        <!-- ホーム＞ルームのページ -->
+        <template id="home_room.html">
+          <ons-page id="home_room">
+            <ons-toolbar>
+              <div class="center">ルーム　タブバー</div>
+            </ons-toolbar>
+
+            <div class="tabbarArea">空のタブバー</div>
+            <div class="userlist room">
+              <img src="img/home_room_item.png" alt="">
+              <img src="img/home_room_item.png" alt="">
+              <img src="img/home_room_item.png" alt="">
+              <img src="img/home_room_item.png" alt="">
+              <img src="img/home_room_item.png" alt="">
+              <img src="img/home_room_item.png" alt="">
+              <img src="img/home_room_item.png" alt="">
+              <img src="img/home_room_item.png" alt="">
+            </div>
+            <!-- room userlist -->
+
+            <!-- タイムライン表示 -->
+            <div class="timeline room">
+              <div class="ttlBox">
+                <div class="ttl">タイムライン</div>
+                <div class="sort"　tappable modifier="longdivider" onclick="ons.openActionSheet({ buttons: ['最新順', 'おすすめ順', 'ランキング順', 'メンバー数順', 'Cancel'], cancelable: true })">最新順</div>
+              </div>
+              <!-- ttlBox -->
+
+              <div class="tlContents room">
+
+                <ul class="list">
+                  <li class="list-item list-item--chevron list-item--tappable">
+                    <div class="list-item__left">
+                      <img class="list-item__thumbnail" src="img/home_room_item.png" alt="">
+                    </div>
+                    <!-- list-item__left -->
+
+                    <div class="list-item__center">
+                      <div class="gametitle_outer">
+                        <div class="gametitle">モンスターハンター</div>
+                        <div>
+                          <i class="fas fa-chevron-right"></i>
+                        </div>
+                      </div>
+                      <!-- gametitle-outer -->
+                      <div class="roomname">【総合】モンスターハンター：ワールド</div>
+                      <div class="info_outer">
+                        <div class="member_outer">
+                          <div class="icon">
+                            <i class="fas fa-user"></i>
+                          </div>
+                          <div class="number">121282</div>
+                        </div>
+                        <!-- member-outer -->
+                        <div class="time_outer">
+                          <div class="icon"><i class="far fa-clock"></i></div>
+                          <div class="time">10分前</div>
+                        </div>
+                        <!-- time-outer -->
+                      </div>
+                      <!-- list-item__info-outer -->
+
+                    </div>
+                    <!-- list-item__center -->
+
+                  </li>
+                  <!-- list-item -->
+
+                  <li class="list-item list-item--chevron list-item--tappable">
+                    <div class="list-item__left">
+                      <img class="list-item__thumbnail" src="img/home_room_item.png" alt="">
+                    </div>
+                    <!-- list-item__left -->
+
+                    <div class="list-item__center">
+                      <div class="gametitle_outer">
+                        <div class="gametitle">モンスターハンター</div>
+                        <div>
+                          <i class="fas fa-chevron-right"></i>
+                        </div>
+                      </div>
+                      <!-- gametitle-outer -->
+                      <div class="roomname">【総合】モンスターハンター：ワールド</div>
+                      <div class="info_outer">
+                        <div class="member_outer">
+                          <div class="icon">
+                            <i class="fas fa-user"></i>
+                          </div>
+                          <div class="number">121282</div>
+                        </div>
+                        <!-- member-outer -->
+                        <div class="time_outer">
+                          <div class="icon"><i class="far fa-clock"></i></div>
+                          <div class="time">10分前</div>
+                        </div>
+                        <!-- time-outer -->
+                      </div>
+                      <!-- list-item__info-outer -->
+
+                    </div>
+                    <!-- list-item__center -->
+
+                  </li>
+                  <!-- list-item -->
+
+                </ul>
+
+              </div>
+              <!-- tlContents -->
+            </div>
+            <!-- timeline -->
+
+          </ons-page>
+        </template>
+        <!-- home_room.html -->
+
+        <!-- ホーム＞イベントのページ -->
+        <template id="home_event.html">
+          <ons-page id="home_event">
+
+            <ons-toolbar>
+              <div class="center">イベント　タブバー</div>
+            </ons-toolbar>
+
+            <div class="tabbarArea">空のタブバー</div>
+            <div class="userlist room">
+              <img src="img/home_event_item.png" alt="">
+              <img src="img/home_event_item.png" alt="">
+              <img src="img/home_event_item.png" alt="">
+              <img src="img/home_event_item.png" alt="">
+              <img src="img/home_event_item.png" alt="">
+              <img src="img/home_event_item.png" alt="">
+              <img src="img/home_event_item.png" alt="">
+              <img src="img/home_event_item.png" alt="">
+              <img src="img/home_event_item.png" alt="">
+            </div>
+            <!-- followUserlist -->
+
+            <!-- タイムライン表示 -->
+            <div class="timeline event">
+              <div class="ttlBox">
+                <div class="ttl">タイムライン</div>
+                <div class="sort"　tappable modifier="longdivider" onclick="ons.openActionSheet({ buttons: ['最新順', 'おすすめ順', 'ランキング順', 'マッチング回数順', 'Cancel'], cancelable: true })">最新順</div>
+              </div>
+              <!-- ttlBox -->
+
+              <div class="tlContents event">
+
+                <ul class="list">
+                  <li class="list-item list-item--chevron list-item--tappable">
+                    <div class="list-item__left">
+                      <img class="list-item__thumbnail" src="img/home_event_item.png" alt="">
+                    </div>
+                    <!-- list-item__left -->
+
+                    <div class="list-item__center">
+                      <div class="eventname">ロケットリーグ</div>
+                      <div class="prev-text">イベント内容イベント内容イベント内容</div>
+
+                      <div class="user_outer">
+                        <div class="icon">
+                          <img src="img/home_event_user.png" alt="">
+                        </div>
+                        <div class="name">remisora</div>
+                      </div>
+                      <!-- member-outer -->
+
+                    </div>
+                    <!-- list-item__center -->
+
+                  </li>
+                  <!-- list-item -->
+
+                  <li class="list-item list-item--chevron list-item--tappable">
+                    <div class="list-item__left">
+                      <img class="list-item__thumbnail" src="img/home_event_item.png" alt="">
+                    </div>
+                    <!-- list-item__left -->
+
+                    <div class="list-item__center">
+                      <div class="eventname">ロケットリーグ</div>
+                      <div class="prev-text">イベント内容イベント内容イベント内容</div>
+
+                      <div class="user_outer">
+                        <div class="icon">
+                          <img src="img/home_event_user.png" alt="">
+                        </div>
+                        <div class="name">remisora</div>
+                      </div>
+                      <!-- member-outer -->
+
+                    </div>
+                    <!-- list-item__center -->
+
+                  </li>
+                  <!-- list-item -->
+
+                </ul>
+
+              </div>
+              <!-- tlContents -->
+            </div>
+            <!-- timeline -->
+
+
+
+
+          </ons-page>
+        </template>
+        <!-- home_event.html -->
+
+        <!-- ホーム＞フォロワーのページ -->
+        <template id="home_follower.html">
+          <ons-page id="home_follower">
+            <ons-toolbar>
+              <div class="center">フォロワー　タブバー</div>
+            </ons-toolbar>
+
+            <div class="tabbarArea">空のタブバー</div>
+            <div class="userlist follower">
+              <div class="user online" onclick="document.getElementById('myNavigator').pushPage('home_otheruser.html')">
+                <img src="img/home_event_user.png" alt="" class="user-img">
+              </div>
+              <div class="user offline" onclick="document.getElementById('myNavigator').pushPage('home_otheruser.html')">
+                <img src="img/home_event_user.png" alt="">
+              </div>
+              <div class="user online" onclick="document.getElementById('myNavigator').pushPage('home_otheruser.html')">
+                <img src="img/home_event_user.png" alt="" class="user-img">
+              </div>
+              <div class="user offline" onclick="document.getElementById('myNavigator').pushPage('home_otheruser.html')">
+                <img src="img/home_event_user.png" alt="">
+              </div>
+            </div>
+            <!-- followerlist -->
+
+
+            <!-- タイムライン表示 -->
+            <div class="timeline follower">
+              <div class="ttlBox">
+                <div class="ttl">タイムライン</div>
+                <div class="sort"　tappable modifier="longdivider" onclick="ons.openActionSheet({ buttons: ['最新順', 'いいね順', '超いいね順', 'フォロワー順', 'Cancel'], cancelable: true })">最新順</div>
+              </div>
+              <!-- ttlBox -->
+
+              <div class="tlContents follower">
+
+                <ul class="list">
+                  <li class="list-item list-item--chevron list-item--tappable">
+
+                    <div class="list-item__center">
+                      <div class="user_outer">
+                        <div class="icon">
+                          <img src="img/home_event_user.png" alt="">
+                        </div>
+                        <div class="name-time_outer">
+                          <div class="name_outer">
+                            <div class="name">remisora</div>
+                            <i class="fas fa-chevron-right"></i>
+                          </div>
+                          <div class="time">10分前</div>
+                        </div>
+                      </div>
+                      <!-- user-outer -->
+
+                      <div class="prev-text">もっと上がるけど、組んでないので分からないですが、どんな装備でしょう(･ω･三･ω･)ﾌﾝﾌﾝ
+                        ちなみに狩猟笛は攻撃特大のみ発動中です</div>
+
+                      <div class="icon-area">
+                        <div class="item img row">
+                          <img src="img/icon_super_nice_inactive.png" alt="">
+                          <div class="count">10</div>
+                        </div>
+                        <div class="item font nice row">
+                          <i class="fas fa-heart"></i>
+                          <div class="count">15</div>
+                        </div>
+                        <div class="item font bookmark">
+                          <i class="fas fa-bookmark"></i>
+                        </div>
+                        <div class="item font retweet">
+                          <i class="fas fa-retweet"></i>
+                        </div>
+                        <div class="item font share">
+                          <i class="fas fa-share"></i>
+                        </div>
+                      </div>
+                      <!-- icon-ara -->
+                    </div>
+                    <!-- list-item__center -->
+
+                  </li>
+                  <!-- list-item -->
+
+                  <li class="list-item list-item--chevron list-item--tappable">
+
+                    <div class="list-item__center">
+                      <div class="user_outer">
+                        <div class="icon">
+                          <img src="img/home_event_user.png" alt="">
+                        </div>
+                        <div class="name-time_outer">
+                          <div class="name_outer">
+                            <div class="name">remisora</div>
+                            <i class="fas fa-chevron-right"></i>
+                          </div>
+                          <div class="time">10分前</div>
+                        </div>
+                      </div>
+                      <!-- user-outer -->
+
+                      <div class="prev-text">もっと上がるけど、組んでないので分からないですが、どんな装備でしょう(･ω･三･ω･)ﾌﾝﾌﾝ
+                        ちなみに狩猟笛は攻撃特大のみ発動中です</div>
+
+                      <div class="icon-area">
+                        <div class="item img row">
+                          <img src="img/icon_super_nice_inactive.png" alt="">
+                          <div class="count">10</div>
+                        </div>
+                        <div class="item font nice row">
+                          <i class="fas fa-heart"></i>
+                          <div class="count">15</div>
+                        </div>
+                        <div class="item font bookmark">
+                          <i class="fas fa-bookmark"></i>
+                        </div>
+                        <div class="item font retweet">
+                          <i class="fas fa-retweet"></i>
+                        </div>
+                        <div class="item font share">
+                          <i class="fas fa-share"></i>
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <!-- list-item__center -->
+
+                  </li>
+                  <!-- list-item -->
+
+                </ul>
+                <!-- list -->
+
+              </div>
+              <!-- tlContents -->
+            </div>
+            <!-- timeline -->
+
+          </ons-page>
+        </template>
+        <!-- home_follower.html -->
+
+        <!-- ホーム＞他ユーザーのページ -->
+        <template id="home_otheruser.html">
+          <ons-page id="home_otheruser">
+            <ons-toolbar>
+              <div class="left">
+                <ons-back-button></ons-back-button>
+              </div>
+              <div class="center">他ユーザー名</div>
+              <div class="right sub-menu" tappable modifier="longdivider" onclick="ons.openActionSheet({ buttons: ['xxxxxさんをブロックする', 'Cancel'], cancelable: true })">
+                <i class="fas fa-ellipsis-h"></i>
+              </div>
+              <!-- right, sub-manu -->
+            </ons-toolbar>
+
+            <div class="cover-outer">
+              <div class="cover-img">
+                <img src="img/otheruser-cover.jpg" alt="">
+              </div>
+              <div class="user-icon"></div>
+            </div>
+            <!-- cover-outer -->
+
+            <div class="btn-area">
+              <div class="follow-friend_outer">
+                <button class="btn-follow"><i class="fas fa-user-plus"></i>フォローする</button>
+              <!-- トグルボタン -->
+              <!-- <button class="btn"></button> -->
+
+                <button class="btn-friend" tappable modifier="longdivider" onclick="ons.notification.confirm('xxxxさんにフレンド申請しますか？')">
+                  <img src="img/icon_friend_prease.png" alt="">
+                  フレンド申請</button>
+              </div>
+              <!-- follow-friend_outer -->
+
+              <div class="talk_outer">
+                <button class="btn-talk"><i class="far fa-comments"></i>トークを見る</button>
+              </div>
+              <!-- talk_outer -->
+
+            </div>
+            <!-- btn-area -->
+
+            <div class="count-list">
+              <div class="item follow" onclick="document.getElementById('myNavigator').pushPage('home_otheruser_follow-list.html')">
+                <div class="count">20</div>
+                <div class="title">フォロー</div>
+              </div>
+              <div class="item friend" onclick="document.getElementById('myNavigator').pushPage('home_otheruser_friend-list.html')">
+                <div class="count">15</div>
+                <div class="title">フレンド</div>
+              </div>
+              <div class="item room" onclick="document.getElementById('myNavigator').pushPage('home_otheruser_room-list.html')">
+                <div class="count">19</div>
+                <div class="title">ルーム</div>
+              </div>
+              <div class="item event" onclick="document.getElementById('myNavigator').pushPage('home_otheruser_event-list.html')">
+                <div class="count">10</div>
+                <div class="title">イベント</div>
+              </div>
+              <div class="item follower" onclick="document.getElementById('myNavigator').pushPage('home_otheruser_follower-list.html')">
+                <div class="count">39</div>
+                <div class="title">フォロワー</div>
+              </div>
+            </div>
+            <!-- count-list -->
+
+            <div class="self-intro">
+              <p>社会人です🙋‍♀️<br>
+                好きなゲーム💖あんさんぶるスターズ！！Music/MHW/ウィッチャー3/あつまれどうぶつの森/DBD/スプラトゥーン2/ポポロクロイス物語/ぐるみん
+                </p>
+            </div>
+            <!-- self-intro -->
+
+            <div class="list-mygame">
+              <div class="title">マイゲーム</div>
+              <div class="list">
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+              <!-- list -->
+            </div>
+            <!-- list-mygame -->
+
+            <div class="recentry-activity">
+              <ons-card>
+                <div class="img-outer">
+                  <!-- <ons-carousel id="carousel" fullscreen swipeable auto-scroll overscrollable initial-index="0">
+                    <ons-carousel-item class="carousel-item" style="background-color: gray">
+                    <img src="img/home_follow_tl-detail.jpg" alt="">
+                    </ons-carousel-item> -->
+
+                  <!-- <div class="dots">
+                    <span id="dot0" class="dot" onclick="fn.swipe(this)">
+                      &#9679;
+                    </span>
+                    <span id="dot1" class="dot" onclick="fn.swipe(this)">
+                      &#9675;
+                    </span>
+                    <span id="dot2" class="dot" onclick="fn.swipe(this)">
+                      &#9675;
+                    </span>
+                  </div> -->
+                  <!-- dots  カルーセル用 -->
+
+                </div>
+                <!-- img-outer -->
+                <div class="content-area">
+                  <div class="user_follow">
+                    <div class="user_outer" onclick="document.getElementById('myNavigator').pushPage('home_otheruser.html')">
+                      <div class="icon">
+                        <img src="img/home_event_user.png" alt="">
+                      </div>
+                      <div class="name-time_outer">
+                        <div class="name_outer">
+                          <div class="name">remisora</div>
+                          <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="time">10分前</div>
+                      </div>
+                      <!-- name-time_outer -->
+                    </div>
+                    <!-- user-outer -->
+                  </div>
+                  <!-- user_follow -->
+
+                  <div class="prev-text" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-post.html')">もっと上がるけど、組んでないので分からないですが、どんな装備でしょう(･ω･三･ω･)ﾌﾝﾌﾝ
+                    ちなみに狩猟笛は攻撃特大のみ発動中です</div>
+                  <div class="icon-area">
+                    <div class="item img row">
+                      <img src="img/icon_super_nice_inactive.png" alt="">
+                      <div class="count">10</div>
+                    </div>
+                    <div class="item font nice row">
+                      <i class="fas fa-heart"></i>
+                      <div class="count">15</div>
+                    </div>
+                    <div class="item font bookmark">
+                      <i class="fas fa-bookmark"></i>
+                    </div>
+                    <!-- <div class="item font comment row"> -->
+                    <div class="item font comment row" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-post_small.html')">
+                      <i class="far fa-comment"></i>
+                      <div class="count">1</div>
+                    </div>
+                    <div class="item font retweet" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-retweet.html')">
+                      <i class="fas fa-retweet"></i>
+                    </div>
+                    <div class="item font share" tappable modifier="longdivider" onclick="ons.openActionSheet({ buttons: ['リンクをコピー',  'Cancel'], cancelable: true })">
+                      <i class="fas fa-share"></i>
+                    </div>
+                  </div>
+                  <!-- icon-ara -->
+
+                  <!-- <div class="comment-more">コメント<span class="coutnt">1</span>件をすべて見る</div> -->
+
+                </div>
+                <!-- content-area -->
+              </ons-card>
+            </div>
+            <!-- recentry-activity -->
+
+          </ons-page>
+        </template>
+        <!-- home_otheruser.html -->
+
+        <!-- ホーム＞他ユーザー＞フォローリストページ -->
+        <template id="home_otheruser_follow-list.html">
+          <ons-page id="home_otheruser_follow-list">
+
+            <ons-toolbar>
+              <div class="left">
+                <ons-back-button></ons-back-button>
+              </div>
+              <div class="center">フォローリスト</div>
+            </ons-toolbar>
+
+            <ul class="list">
+              <li class="list-item list-item--chevron list-item--tappable">
+                <div class="list-item__left">
+                  <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                </div>
+                <!-- list-item__left -->
+                <div class="list-item__center">
+                  <div class="text_outer">
+                    <div class="user-name">⭐︎AkA⭐︎</div>
+                </div>
+                  <!-- text-outer -->
+                </div>
+                <!-- list-item__center -->
+              </li>
+              <li class="list-item list-item--chevron list-item--tappable">
+                <div class="list-item__left">
+                  <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                </div>
+                <!-- list-item__left -->
+                <div class="list-item__center">
+                  <div class="text_outer">
+                    <div class="user-name">⭐︎AkA⭐︎</div>
+                </div>
+                  <!-- text-outer -->
+                </div>
+                <!-- list-item__center -->
+              </li>
+              <li class="list-item list-item--chevron list-item--tappable">
+                <div class="list-item__left">
+                  <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                </div>
+                <!-- list-item__left -->
+                <div class="list-item__center">
+                  <div class="text_outer">
+                    <div class="user-name">⭐︎AkA⭐︎</div>
+                </div>
+                  <!-- text-outer -->
+                </div>
+                <!-- list-item__center -->
+              </li>
+            </ul>
+          </ons-page>
+        </template>
+        <!-- home_otheruser_follow-list.html -->
+
+        <!-- ホーム＞他ユーザー＞フレンドリストページ -->
+        <template id="home_otheruser_friend-list.html">
+          <ons-page id="home_otheruser_friend-list">
+
+            <ons-toolbar>
+              <div class="left">
+                <ons-back-button></ons-back-button>
+              </div>
+              <div class="center">フレンドリスト</div>
+            </ons-toolbar>
+
+            <ul class="list">
+              <li class="list-item list-item--chevron list-item--tappable">
+                <div class="list-item__left">
+                  <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                </div>
+                <!-- list-item__left -->
+                <div class="list-item__center">
+                  <div class="text_outer">
+                    <div class="user-name">⭐︎AkA⭐︎</div>
+                </div>
+                  <!-- text-outer -->
+                </div>
+                <!-- list-item__center -->
+              </li>
+              <li class="list-item list-item--chevron list-item--tappable">
+                <div class="list-item__left">
+                  <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                </div>
+                <!-- list-item__left -->
+                <div class="list-item__center">
+                  <div class="text_outer">
+                    <div class="user-name">⭐︎AkA⭐︎</div>
+                </div>
+                  <!-- text-outer -->
+                </div>
+                <!-- list-item__center -->
+              </li>
+              <li class="list-item list-item--chevron list-item--tappable">
+                <div class="list-item__left">
+                  <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                </div>
+                <!-- list-item__left -->
+                <div class="list-item__center">
+                  <div class="text_outer">
+                    <div class="user-name">⭐︎AkA⭐︎</div>
+                </div>
+                  <!-- text-outer -->
+                </div>
+                <!-- list-item__center -->
+              </li>
+            </ul>
+          </ons-page>
+        </template>
+        <!-- home_otheruser_friend-list.html -->
+
+        <!-- ホーム＞他ユーザー＞ルームリストページ -->
+        <template id="home_otheruser_room-list.html">
+          <ons-page id="home_otheruser_room-list">
+
+            <ons-toolbar>
+              <div class="left">
+                <ons-back-button></ons-back-button>
+              </div>
+              <div class="center">ルームリスト</div>
+            </ons-toolbar>
+
+            <ul class="list">
+              <li class="list-item list-item--chevron list-item--tappable">
+                <div class="list-item__left">
+                  <img class="list-item__thumbnail" src="img/home_room_item.png" alt="">
+                </div>
+                <!-- list-item__left -->
+
+                <div class="list-item__center">
+
+                  <div class="gametitle_outer">
+                    <div class="gametitle">モンスターハンター</div>
+                    <div>
+                      <i class="fas fa-chevron-right"></i>
+                    </div>
+                  </div>
+                  <!-- gametitle-outer -->
+                  <div class="roomname">【総合】モンスターハンター：ワールド</div>
+                  <div class="info_outer">
+                    <div class="member_outer">
+                      <div class="icon">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div class="number">121282</div>
+                    </div>
+                    <!-- member-outer -->
+                    <div class="time_outer">
+                      <div class="icon"><i class="far fa-clock"></i></div>
+                      <div class="time">10分前</div>
+                    </div>
+                    <!-- time-outer -->
+                  </div>
+                  <!-- list-item__info-outer -->
+                </div>
+                <!-- list-item__center -->
+              </li>
+
+              <li class="list-item list-item--chevron list-item--tappable">
+                <div class="list-item__left">
+                  <img class="list-item__thumbnail" src="img/home_room_item.png" alt="">
+                </div>
+                <!-- list-item__left -->
+
+                <div class="list-item__center">
+
+                  <div class="gametitle_outer">
+                    <div class="gametitle">モンスターハンター</div>
+                    <div>
+                      <i class="fas fa-chevron-right"></i>
+                    </div>
+                  </div>
+                  <!-- gametitle-outer -->
+                  <div class="roomname">【総合】モンスターハンター：ワールド</div>
+                  <div class="info_outer">
+                    <div class="member_outer">
+                      <div class="icon">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div class="number">121282</div>
+                    </div>
+                    <!-- member-outer -->
+                    <div class="time_outer">
+                      <div class="icon"><i class="far fa-clock"></i></div>
+                      <div class="time">10分前</div>
+                    </div>
+                    <!-- time-outer -->
+                  </div>
+                  <!-- list-item__info-outer -->
+                </div>
+                <!-- list-item__center -->
+              </li>
+            </ul>
+          </ons-page>
+        </template>
+        <!-- home_otheruser_room-list.html -->
+
+        <!-- ホーム＞他ユーザー＞イベントリストページ -->
+        <template id="home_otheruser_event-list.html">
+          <ons-page id="home_otheruser_event-list">
+
+            <ons-toolbar>
+              <div class="left">
+                <ons-back-button></ons-back-button>
+              </div>
+              <div class="center">イベントリスト</div>
+            </ons-toolbar>
+
+            <ul class="list">
+              <li class="list-item list-item--chevron list-item--tappable">
+                <div class="list-item__left">
+                  <img class="list-item__thumbnail" src="img/home_room_item.png" alt="">
+                </div>
+                <!-- list-item__left -->
+
+                <div class="list-item__center">
+
+                  <div class="gametitle_outer">
+                    <div class="gametitle">モンスターハンター</div>
+                    <div>
+                      <i class="fas fa-chevron-right"></i>
+                    </div>
+                  </div>
+                  <!-- gametitle-outer -->
+                  <div class="roomname">【総合】モンスターハンター：ワールド</div>
+                  <div class="info_outer">
+                    <div class="member_outer">
+                      <div class="icon">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div class="number">121282</div>
+                    </div>
+                    <!-- member-outer -->
+                    <div class="time_outer">
+                      <div class="icon"><i class="far fa-clock"></i></div>
+                      <div class="time">10分前</div>
+                    </div>
+                    <!-- time-outer -->
+                  </div>
+                  <!-- list-item__info-outer -->
+                </div>
+                <!-- list-item__center -->
+              </li>
+
+              <li class="list-item list-item--chevron list-item--tappable">
+                <div class="list-item__left">
+                  <img class="list-item__thumbnail" src="img/home_room_item.png" alt="">
+                </div>
+                <!-- list-item__left -->
+
+                <div class="list-item__center">
+
+                  <div class="gametitle_outer">
+                    <div class="gametitle">モンスターハンター</div>
+                    <div>
+                      <i class="fas fa-chevron-right"></i>
+                    </div>
+                  </div>
+                  <!-- gametitle-outer -->
+                  <div class="roomname">【総合】モンスターハンター：ワールド</div>
+                  <div class="info_outer">
+                    <div class="member_outer">
+                      <div class="icon">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div class="number">121282</div>
+                    </div>
+                    <!-- member-outer -->
+                    <div class="time_outer">
+                      <div class="icon"><i class="far fa-clock"></i></div>
+                      <div class="time">10分前</div>
+                    </div>
+                    <!-- time-outer -->
+                  </div>
+                  <!-- list-item__info-outer -->
+                </div>
+                <!-- list-item__center -->
+              </li>
+            </ul>
+          </ons-page>
+        </template>
+        <!-- home_otheruser_event-list.html -->
+
+        <!-- ホーム＞他ユーザー＞フォロワーリストページ -->
+        <template id="home_otheruser_follower-list.html">
+          <ons-page id="home_otheruser_follower-list">
+
+            <ons-toolbar>
+              <div class="left">
+                <ons-back-button></ons-back-button>
+              </div>
+              <div class="center">フォロワーリスト</div>
+            </ons-toolbar>
+
+            <ul class="list">
+              <li class="list-item list-item--chevron list-item--tappable">
+                <div class="list-item__left">
+                  <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                </div>
+                <!-- list-item__left -->
+                <div class="list-item__center">
+                  <div class="text_outer">
+                    <div class="user-name">⭐︎AkA⭐︎</div>
+                </div>
+                  <!-- text-outer -->
+                </div>
+                <!-- list-item__center -->
+              </li>
+              <li class="list-item list-item--chevron list-item--tappable">
+                <div class="list-item__left">
+                  <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                </div>
+                <!-- list-item__left -->
+                <div class="list-item__center">
+                  <div class="text_outer">
+                    <div class="user-name">⭐︎AkA⭐︎</div>
+                </div>
+                  <!-- text-outer -->
+                </div>
+                <!-- list-item__center -->
+              </li>
+              <li class="list-item list-item--chevron list-item--tappable">
+                <div class="list-item__left">
+                  <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                </div>
+                <!-- list-item__left -->
+                <div class="list-item__center">
+                  <div class="text_outer">
+                    <div class="user-name">⭐︎AkA⭐︎</div>
+                </div>
+                  <!-- text-outer -->
+                </div>
+                <!-- list-item__center -->
+              </li>
+            </ul>
+          </ons-page>
+        </template>
+        <!-- home_otheruser_follower-list.html -->
+
+      </div>
+      <!-- menuUpper -->
+
+    </ons-page>
+    <!-- tab1 -->
+  </template>
+  <!-- home.html -->
+
+  <!-- フッタータブバー ルーム画面(tab2) -->
+  <template id="room.html">
+    <ons-page id="room">
+
+      <!-- ルーム一覧画面 -->
+      <!-- ルーム追加ボタン -->
+      <ons-fab position="bottom right" class="btn-addroom" onclick="document.getElementById('myNavigator').pushPage('')">
+        <i class="fas fa-plus"></i>
+      </ons-fab>
+
+      <ons-toolbar>
+        <div class="left">
+          <!-- <ons-back-button></ons-back-button> -->
+        </div>
+        <div class="center">ルーム</div>
+      </ons-toolbar>
+
+      <div class="search-box">
+        <ons-search-input
+        placeholder="ルーム内をさがす"
+        onchange="ons.notification.alert('Searched for: ' + this.value)"></ons-search-input>
+      <div class="searchOption" onclick="document.getElementById('myNavigator').pushPage('')">
+        <img src="img/iconSearchOption.png" alt="">
+      </div>
+      </div>
+      <!-- search-box -->
+
+      <div class="mygame-list">
+        <div class="title">マイゲーム</div>
+        <div class="mygame-list-wrap">
+          <ul>
+            <li class="active"><img src="img/home_room_item.png" alt=""></li>
+            <li><img src="img/home_room_item.png" alt=""></li>
+            <li><img src="img/home_room_item.png" alt=""></li>
+            <li><img src="img/home_room_item.png" alt=""></li>
+            <li><img src="img/home_room_item.png" alt=""></li>
+            <li><img src="img/home_room_item.png" alt=""></li>
+            <li><img src="img/home_room_item.png" alt=""></li>
+            <li><img src="img/home_room_item.png" alt=""></li>
+          </ul>
+
+          <div class="btn-addmygame-outer">
+            <ons-fab position="top right" class="btn-addmygame" onclick="document.getElementById('myNavigator').pushPage('')">
+              <i class="fas fa-plus"></i>
+            </ons-fab>
+          </div>
+          <!-- btn-addmygame-outer -->
+        </div>
+        <!-- mygame-list-outer -->
+      </div>
+      <!-- mygame-list -->
+
+      <div class="myroom-list">
+        <ul class="list">
+          <li class="list-item list-item--chevron list-item--tappable" onclick="document.getElementById('myNavigator').pushPage('room_detail.html')">
+            <div class="list-item__left">
+              <img class="list-item__thumbnail" src="img/home_room_item.png" alt="">
+            </div>
+            <!-- list-item__left -->
+
+            <div class="list-item__center">
+              <div class="gametitle_outer">
+                <div class="gametitle">モンスターハンター</div>
+                <div>
+                  <i class="fas fa-chevron-right"></i>
+                </div>
+              </div>
+              <!-- gametitle-outer -->
+              <div class="roomname">【総合】モンスターハンター：ワールド</div>
+              <div class="info_outer">
+                <div class="member_outer">
+                  <div class="icon">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <div class="number">121282</div>
+                </div>
+                <!-- member-outer -->
+                <div class="time_outer">
+                  <div class="icon"><i class="far fa-clock"></i></div>
+                  <div class="time">10分前</div>
+                </div>
+                <!-- time-outer -->
+              </div>
+              <!-- list-item__info-outer -->
+
+            </div>
+            <!-- list-item__center -->
+
+          </li>
+          <!-- list-item -->
+
+          <li class="list-item list-item--chevron list-item--tappable" onclick="document.getElementById('myNavigator').pushPage('room_detail.html')">
+            <div class="list-item__left">
+              <img class="list-item__thumbnail" src="img/home_room_item.png" alt="">
+            </div>
+            <!-- list-item__left -->
+
+            <div class="list-item__center">
+              <div class="gametitle_outer">
+                <div class="gametitle">モンスターハンター</div>
+                <div>
+                  <i class="fas fa-chevron-right"></i>
+                </div>
+              </div>
+              <!-- gametitle-outer -->
+              <div class="roomname">【総合】モンスターハンター：ワールド</div>
+              <div class="info_outer">
+                <div class="member_outer">
+                  <div class="icon">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <div class="number">121282</div>
+                </div>
+                <!-- member-outer -->
+                <div class="time_outer">
+                  <div class="icon"><i class="far fa-clock"></i></div>
+                  <div class="time">10分前</div>
+                </div>
+                <!-- time-outer -->
+              </div>
+              <!-- list-item__info-outer -->
+
+            </div>
+            <!-- list-item__center -->
+
+          </li>
+          <!-- list-item -->
+
+        </ul>
+      </div>
+      <!-- myroom-list -->
+
+
+
+      <!-- テンプレート -->
+      <!-- ルーム詳細画面 -->
+      <template id="room_detail.html">
+        <ons-page id="room_detail">
+        <ons-toolbar>
+          <div class="left">
+            <ons-back-button></ons-back-button>
+          </div>
+          <div class="center">【総合】モンスターハンター</div>
+          <div class="right"><i class="fas fa-search"></i></div>
+        </ons-toolbar>
+
+        <div class="room_detail_tabbar">
+          <ons-tabbar swipeable position="top" tab-border>
+            <!-- ルーム＞ルーム詳細＞タイムライン -->
+            <ons-tab page="room_detail_timeline.html" label="タイムライン" icon="" badge="" active>
+            </ons-tab>
+            <!-- room_detail_timeline.html -->
+
+            <!-- ルーム＞ルーム詳細＞まとめ -->
+            <ons-tab page="room_detail_matome.html" label="まとめ" icon="">
+            </ons-tab>
+            <!-- room_detail_matome.html -->
+
+            <!-- ルーム＞ルーム詳細＞ルーム情報 -->
+            <ons-tab page="room_detail_info.html" label="ルーム情報" icon="">
+            </ons-tab>
+            <!-- room_detail_info.html -->
+
+          </ons-tabbar>
+        </div>
+        <!-- room_detail_tabbar -->
+        </ons-page>
+      </template>
+      <!-- room_detail.html -->
+
+      <!-- ルーム詳細＞タイムライン -->
+      <template id="room_detail_timeline.html">
+        <ons-page id="room_detail_timeline">
+
+          <ons-card>
+            <div class="img-outer">
+              <ons-carousel id="carousel" fullscreen swipeable auto-scroll overscrollable initial-index="0">
+                <ons-carousel-item class="carousel-item" style="background-color: gray">
+                <img src="img/home_follow_tl-detail.jpg" alt="">
+                </ons-carousel-item>
+
+                <ons-carousel-item class="carousel-item" style="background-color: #085078">
+                  <div class="color-tag">カルーセル2</div>
+                </ons-carousel-item>
+
+                <ons-carousel-item class="carousel-item" style="background-color: #D38312">
+                  <div class="color-tag">カルーセル3</div>
+                </ons-carousel-item>
+              </ons-carousel>
+
+              <div class="dots">
+                <span id="dot0" class="dot" onclick="fn.swipe(this)">
+                  &#9679;
+                </span>
+                <span id="dot1" class="dot" onclick="fn.swipe(this)">
+                  &#9675;
+                </span>
+                <span id="dot2" class="dot" onclick="fn.swipe(this)">
+                  &#9675;
+                </span>
+              </div>
+              <!-- dots  カルーセル用 -->
+
+            </div>
+            <!-- img-outer -->
+
+            <div class="content-area">
+              <div class="user_follow">
+                <div class="user_outer" onclick="document.getElementById('myNavigator').pushPage('home_otheruser.html')">
+                  <div class="icon">
+                    <img src="img/home_event_user.png" alt="">
+                  </div>
+                  <div class="name-time_outer">
+                    <div class="name_outer">
+                      <div class="name">remisora</div>
+                      <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="time">10分前</div>
+                  </div>
+                  <!-- name-time_outer -->
+                </div>
+                <!-- user-outer -->
+                <ons-button class="btn-follow"><i class="fas fa-user-plus"></i>フォローする</ons-button>
+
+                <div class="sub-menu" tappable modifier="longdivider" onclick="ons.openActionSheet({ buttons: ['リンクをコピー', 'フォローをやめる', 'Cancel'], cancelable: true })">
+                  <i class="fas fa-ellipsis-h"></i>
+                </div>
+                <!-- sub-menu -->
+
+              </div>
+              <!-- user_follow -->
+
+              <div class="prev-text" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-post.html')">もっと上がるけど、組んでないので分からないですが、どんな装備でしょう(･ω･三･ω･)ﾌﾝﾌﾝ
+                ちなみに狩猟笛は攻撃特大のみ発動中です</div>
+              <div class="icon-area">
+                <div class="item img row">
+                  <img src="img/icon_super_nice_inactive.png" alt="">
+                  <div class="count">10</div>
+                </div>
+                <div class="item font nice row">
+                  <i class="fas fa-heart"></i>
+                  <div class="count">15</div>
+                </div>
+                <div class="item font bookmark">
+                  <i class="fas fa-bookmark"></i>
+                </div>
+                <!-- <div class="item font comment row"> -->
+                <div class="item font comment row" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-post_small.html')">
+                  <i class="far fa-comment"></i>
+                  <div class="count">1</div>
+                </div>
+                <div class="item font retweet" onclick="document.getElementById('myNavigator').pushPage('home_follow_tl-retweet.html')">
+                  <i class="fas fa-retweet"></i>
+                </div>
+                <div class="item font share"　id="share" tappable modifier="longdivider" onclick="ons.openActionSheet({ buttons: ['リンクをコピー',  'Cancel'], cancelable: true })">
+                  <i class="fas fa-share"></i>
+                </div>
+              </div>
+              <!-- icon-ara -->
+
+              <div class="comment-more">コメント<span class="coutnt">1</span>件をすべて見る</div>
+            </div>
+            <!-- content-area -->
+          </ons-card>
+
+      </ons-page>
+      </template>
+      <!-- room_detail_timeline.html -->
+
+      <!-- ルーム詳細＞まとめ -->
+      <template id="room_detail_matome.html">
+        <ons-page id="room_detail_matome">
+
+        <!-- まとめ追加ボタン -->
+        <ons-fab position="bottom right" class="btn-addmatome" onclick="document.getElementById('myNavigator').pushPage('room_detail_matome_addnew.html')">
+        <i class="fas fa-plus"></i>
+        </ons-fab>
+
+          <div class="matome-list">
+            <ul class="list">
+              <li class="list-item list-item--chevron list-item--tappable" onclick="document.getElementById('myNavigator').pushPage('room_detail_matome_detail.html')">
+                <div class="list-item__left">
+                  <i class="far fa-file-alt"></i>
+                </div>
+                <!-- list-item__left -->
+                <div class="list-item__center">
+                  <div class="title-outer">
+                    <div class="title">はじめての方へ</div>
+                    <div class="info_outer">
+                      <div class="time_outer">
+                        <div class="icon"><i class="far fa-clock"></i></div>
+                        <div class="time">1日前</div>
+                      </div>
+                      <!-- time-outer -->
+                      <div class="comment-outer"><div class="icon"><i class="far fa-comment"></i></div>
+                        <div class="number">3</div>
+                      </div>
+                      <!-- comment-outer -->
+                    </div>
+                    <!-- list-item__info-outer -->
+                  </div>
+                  <!-- title-outer -->
+                </div>
+                <!-- list-item__center -->
+
+              </li>
+              <!-- list-item -->
+
+              <li class="list-item list-item--chevron list-item--tappable" onclick="document.getElementById('myNavigator').pushPage('')">
+                <div class="list-item__left">
+                  <i class="far fa-file-alt"></i>
+                </div>
+                <!-- list-item__left -->
+                <div class="list-item__center">
+                  <div class="title-outer">
+                    <div class="title">自己紹介まとめ</div>
+                    <div class="info_outer">
+                      <div class="time_outer">
+                        <div class="icon"><i class="far fa-clock"></i></div>
+                        <div class="time">1日前</div>
+                      </div>
+                      <!-- time-outer -->
+                      <div class="comment-outer
+  "><div class="icon"><i class="far fa-comment"></i></div>
+                        <div class="number">10</div>
+                      </div>
+                      <!-- comment-outer -->
+                    </div>
+                    <!-- list-item__info-outer -->
+                  </div>
+                  <!-- title-outer -->
+                </div>
+                <!-- list-item__center -->
+
+              </li>
+              <!-- list-item -->
+
+            </ul>
+          </div>
+          <!-- myroom-list -->
+
+          <!-- まとめ詳細画面 -->
+          <template id="room_detail_matome_detail.html">
+            <ons-page id="room_detail_matome_detail">
+              <ons-toolbar>
+                <div class="left">
+                  <ons-back-button></ons-back-button>
+                </div>
+                <div class="center">はじめての方へ</div>
+                <div class="right"></div>
+              </ons-toolbar>
+
+              <div class="contents">
+                <ul class="list">
+                  <li class="list-item">
+                    <div class="list-item__center">
+                      <div class="user_outer">
+                        <div class="icon">
+                          <img src="img/home_event_user.png" alt="">
+                        </div>
+                        <div class="name-time_outer">
+                          <div class="name_outer">
+                            <div class="name">remisora</div>
+                            <i class="fas fa-chevron-right"></i>
+                          </div>
+                          <div class="time">10分前</div>
+                        </div>
+                      </div>
+                      <!-- user-outer -->
+
+                      <div class="prev-text">はじめまして、ルーム【総合】モンスターハンター：ワールド管理人のノネックです。
+
+                        このまとめでは、ルームのお約束・注意事項などをまとめてあります。
+                        </div>
+                        <div class="reply-outer">
+                          <ons-button modifier="quiet" class="reply">返信する</ons-button>
+                        </div>
+                    </div>
+                    <!-- list-item__center -->
+
+                  </li>
+                  <!-- list-item -->
+
+
+                </ul>
+                <!-- list -->
+
+              </div>
+              <!-- tlContents -->
+
+              </ons-page>
+            </template>
+            <!-- room_detail_matome_detail.html -->
+
+          <!-- まとめ新規追加画面 -->
+          <template id="room_detail_matome_addnew.html">
+            <ons-page id="room_detail_matome_addnew">
+              <ons-toolbar>
+                <div class="left">
+                  <ons-back-button></ons-back-button>
+                  <!-- <ons-button class="btn-addmatome"><i class="far fa-times-circle"></i></ons-button> -->
+                </div>
+                <div class="center">まとめ新規作成</div>
+                <div class="right"></div>
+              </ons-toolbar>
+
+              <div class="text-outer">
+                <textarea class="title" rows="1" placeholder="タイトル"></textarea>
+                <div class="contents-outer">
+                  <textarea class="contents" rows="10" placeholder="内容"></textarea>
+                  <div class="count-outer">
+                    <div class="count">0</div> / 200
+                  </div>
+                </div>
+              </div>
+              <!-- text-outer -->
+
+              <div class="btn-outer">
+                <ons-button class="btn-postmatome" onclick="document.getElementById('myNavigator').pushPage('')">投稿</ons-button>
+              </div>
+
+
+            </ons-page>
+          </template>
+          <!-- room_detail_matome_addnew.html -->
+
+        </ons-page>
+      </template>
+      <!-- room_detail_matome.html -->
+
+      <!-- ルーム詳細＞ルーム情報 -->
+      <template id="room_detail_info.html">
+        <ons-page id="room_detail_info">
+
+          <div class="outline">
+            <ul class="list">
+              <li class="list-item">
+                <div class="list-item__left">
+                  <img class="list-item__thumbnail" src="img/home_room_item.png" alt="">
+                </div>
+                <!-- list-item__left -->
+    
+                <div class="list-item__center">
+                  <div class="gametitle_outer">
+                    <div class="gametitle">モンスターハンター</div>
+                    <div>
+                      <i class="fas fa-chevron-right"></i>
+                    </div>
+                  </div>
+                  <!-- gametitle-outer -->
+                  <div class="roomname">【総合】モンスターハンター：ワールド</div>
+                  <div class="info_outer">
+                    <div class="member_outer">
+                      <div class="icon">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div class="number">121282</div>
+                    </div>
+                    <!-- member-outer -->
+                    <div class="time_outer">
+                      <div class="icon"><i class="far fa-clock"></i></div>
+                      <div class="time">10分前</div>
+                    </div>
+                    <!-- time-outer -->
+                  </div>
+                  <!-- list-item__info-outer -->
+    
+                </div>
+                <!-- list-item__center -->
+    
+              </li>
+              <!-- list-item -->
+            </ul>
+          </div>
+          <!-- outline -->
+
+          <div class="detail-text-outer">
+            <div class="text">
+              ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報ルーム情報
+            </div>
+            <div class="create-date-outer">
+              <div class="title">ルーム作成日：</div>
+              <div class="date">2020/6/11</div>
+            </div>
+          </div>
+          <!-- detail-text-outer -->
+
+          <div class="btn-outer">
+            <ons-button class="btn-join" onclick="document.getElementById('myNavigator').pushPage('')">このルームに参加する</ons-button>
+          </div>
+
+          <div class="setting">
+            <ul class="list">
+              <!-- メンバー -->
+              <li class="list-item list-item--chevron list-item--tappable member" onclick="document.getElementById('myNavigator').pushPage('room_detail_info_member.html')">
+                <div class="list-item__left">
+                  <div class="title">メンバー</div>
+                </div>
+                <!-- list-item__left -->
+                <div class="list-item__center">
+                </div>
+                <!-- list-item__center -->
+                <div class="list-item__right">
+                </div>
+              </li>
+              <!-- list-item -->
+
+              <!-- 招待コード -->
+              <li class="list-item list-item--chevron list-item--tappable" onclick="document.getElementById('myNavigator').pushPage('room_detail_info_invitation.html')">
+                <div class="list-item__left">
+                  <div class="title">招待コード</div>
+                </div>
+                <!-- list-item__left -->
+                <div class="list-item__center">
+                </div>
+                <!-- list-item__center -->
+                <div class="list-item__right">
+                </div>
+              </li>
+              <!-- list-item -->
+
+              <!-- プッシュ通知を受け取る -->
+              <li class="list-item">
+                <div class="list-item__left">
+                  <div class="title">ルームからプッシュ通知を受け取る</div>
+                </div>
+                <!-- list-item__left -->
+                <div class="list-item__center">
+                </div>
+                <!-- list-item__center -->
+                <div class="list-item__right">         <label class="switch">
+                  <input type="checkbox" class="switch__input" checked>
+                  <div class="switch__toggle">
+                    <div class="switch__handle"></div>
+                  </div>
+                </label>
+                </div>
+              </li>
+              <!-- list-item -->
+
+              <!-- ルームを編集する -->
+              <li class="list-item list-item--chevron list-item--tappable" onclick="document.getElementById('myNavigator').pushPage('')">
+                <div class="list-item__left">
+                  <div class="title">ルームを編集する（ルーム管理者機能）</div>
+                </div>
+                <!-- list-item__left -->
+                <div class="list-item__center">
+                </div>
+                <!-- list-item__center -->
+                <div class="list-item__right">
+                </div>
+              </li>
+              <!-- list-item -->
+
+              <!-- ルームを退会する -->
+              <li class="list-item list-item--chevron list-item--tappable leave" onclick="document.getElementById('myNavigator').pushPage('')">
+                <div class="list-item__left">
+                  <div class="title">ルームから退会する</div>
+                </div>
+                <!-- list-item__left -->
+                <div class="list-item__center">
+                </div>
+                <!-- list-item__center -->
+                <div class="list-item__right">
+                </div>
+              </li>
+              <!-- list-item -->
+
+            </ul>
+          </div>
+          <!-- setting -->
+
+          <!-- テンプレート -->
+          <!-- ルーム詳細＞ルーム情報＞メンバー -->
+          <template id="room_detail_info_member.html">
+            <ons-page id="room_detail_info_member">
+              <ons-toolbar>
+                <div class="left">
+                  <ons-back-button></ons-back-button>
+                </div>
+                <div class="center">【総合】モンスターハンター</div>
+                <div class="right"><i class="fas fa-search"></i></div>
+              </ons-toolbar>
+
+              <ul class="list admin">
+                <li class="list-header">管理者</li>
+                <li class="list-item list-item--chevron list-item--tappable">
+                  <div class="list-item__left">
+                    <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                  </div>
+                  <!-- list-item__left -->
+                  <div class="list-item__center">
+                    <div class="text_outer">
+                      <div class="user-name">きゃんゆう</div>
+                  </div>
+                  <!-- text-outer -->
+                  </div>
+                  <!-- list-item__center -->
+                </li>
+              </ul>
+              <!-- list admin -->
+
+              <ul class="list member">
+                <li class="list-header">メンバー</li>
+                <li class="list-item list-item--chevron list-item--tappable">
+                  <div class="list-item__left">
+                    <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                  </div>
+                  <!-- list-item__left -->
+                  <div class="list-item__center">
+                    <div class="text_outer">
+                      <div class="user-name">ラタタット</div>
+                  </div>
+                  <!-- text-outer -->
+                  </div>
+                  <!-- list-item__center -->
+                </li>
+                <li class="list-item list-item--chevron list-item--tappable">
+                  <div class="list-item__left">
+                    <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                  </div>
+                  <!-- list-item__left -->
+                  <div class="list-item__center">
+                    <div class="text_outer">
+                      <div class="user-name">ラタタット</div>
+                  </div>
+                  <!-- text-outer -->
+                  </div>
+                  <!-- list-item__center -->
+                </li>
+                <li class="list-item list-item--chevron list-item--tappable">
+                  <div class="list-item__left">
+                    <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                  </div>
+                  <!-- list-item__left -->
+                  <div class="list-item__center">
+                    <div class="text_outer">
+                      <div class="user-name">ラタタット</div>
+                  </div>
+                  <!-- text-outer -->
+                  </div>
+                  <!-- list-item__center -->
+                </li>
+              </ul>
+              <!-- list member -->
+
+            </ons-page>
+          </template>
+          <!-- room_detail_info_member.html -->
+
+          <!-- ルーム詳細＞ルーム情報＞招待コード -->
+          <template id="room_detail_info_invitation.html">
+            <ons-page id="room_detail_info_invitation">
+              <ons-toolbar>
+                <div class="left">
+                  <ons-back-button></ons-back-button>
+                </div>
+                <div class="center">【総合】モンスターハンター</div>
+                <div class="right"><i class="fas fa-search"></i></div>
+              </ons-toolbar>
+
+              <ul class="list">
+                <li class="list-header">招待コード</li>
+                <!-- 招待コードコピー -->
+                <li class="list-item">
+                  <div class="list-item__left">
+                    <i class="fas fa-link"></i>
+                  </div>
+                  <!-- list-item__left -->
+                  <div class="list-item__center">
+                    <div class="text_outer">
+                      <div class="user-name">xxxxxxxxxxxxxxxx…</div>
+                    </div>
+                    <!-- text-outer -->
+                    <ons-button class="btn-codecopy" tappable cancelable modifier="longdivider" onclick="ons.notification.alert('招待コードをクリップボードにコピーしました。')">COPY</ons-button>
+                  </div>
+
+                <!-- list-item__center -->
+                  <div class="list-item__right">
+                    <i class="fas fa-ellipsis-h"></i>
+                  </div>
+                <!-- list-item__right -->
+                </li>
+                <!-- 招待コードをフレンドに送信 -->
+                <li class="list-item list-item--chevron list-item--tappable" onclick="document.getElementById('myNavigator').pushPage('room_detail_info_invitation_send.html')">
+                  <div class="list-item__center">招待コードをフレンドに送信
+                  </div>
+                <!-- list-item__center -->
+                </li>
+              </ul>
+              <!-- list -->
+            </ons-page>
+          </template>
+          <!-- room_detail_info_invitation.html -->
+
+          <!-- ルーム詳細＞ルーム情報＞招待コード＞フレンド送信 -->
+          <template id="room_detail_info_invitation_send.html">
+            <ons-page id="room_detail_info_invitation_send">
+              <ons-toolbar>
+                <div class="left">
+                  <ons-back-button></ons-back-button>
+                </div>
+                <div class="center">招待コードをフレンドに送信</div>
+                <div class="right"><i class="fas fa-search"></i></div>
+              </ons-toolbar>
+
+              <ul class="list">
+                <li class="list-item">
+                  <div class="list-item__left">
+                    <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                  </div>
+                  <!-- list-item__left -->
+                  <div class="list-item__center">
+                    <div class="text_outer">
+                      <div class="user-name">⭐︎AkA⭐︎</div>
+                      <i class="fas fa-chevron-right"></i>
+                  </div>
+                  <!-- text-outer -->
+                  </div>
+                  <!-- list-item__center -->
+                  <div class="list-item__right">
+                    <label class="checkbox">
+                      <input type="checkbox" id="checkbox1" class="checkbox__input" name="a" checked="checked">
+                      <div class="checkbox__checkmark"></div>
+                    </label>
+                  </div>
+                  <!-- list-item__right -->
+                </li>
+                <li class="list-item">
+                  <div class="list-item__left">
+                    <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                  </div>
+                  <!-- list-item__left -->
+                  <div class="list-item__center">
+                    <div class="text_outer">
+                      <div class="user-name">⭐︎AkA⭐︎</div>
+                      <i class="fas fa-chevron-right"></i>
+                  </div>
+                  <!-- text-outer -->
+                  </div>
+                  <!-- list-item__center -->
+                  <div class="list-item__right">
+                    <label class="checkbox">
+                      <input type="checkbox" id="checkbox2" class="checkbox__input" name="b">
+                      <div class="checkbox__checkmark"></div>
+                    </label>
+                  </div>
+                  <!-- list-item__right -->
+                </li>
+                <li class="list-item">
+                  <div class="list-item__left">
+                    <img class="list-item__thumbnail" src="img/friendIcon.png" alt="">
+                  </div>
+                  <!-- list-item__left -->
+                  <div class="list-item__center">
+                    <div class="text_outer">
+                      <div class="user-name">⭐︎AkA⭐︎</div>
+                      <i class="fas fa-chevron-right"></i>
+                  </div>
+                  <!-- text-outer -->
+                  </div>
+                  <!-- list-item__center -->
+                  <div class="list-item__right">
+                    <label class="checkbox">
+                      <input type="checkbox" id="checkbox3" class="checkbox__input" name="c" checked="checked">
+                      <div class="checkbox__checkmark"></div>
+                    </label>
+                  </div>
+                  <!-- list-item__right -->
+                </li>
+              </ul>
+              <!-- list -->
+
+              <!-- 招待コード送信ボタン -->
+              <div class="btn-outer">
+                <ons-button class="btn-sendcode" tappable cancelable modifier="longdivider" onclick="ons.notification.alert('招待コードを送信しました。')">招待コードを送信</ons-button>
+              </div>
+              <!-- btn-outer -->
+
+
+            </ons-page>
+          </template>
+          <!-- room_detail_info_invitation_send.html -->
+
+        </ons-page>
+      </template>
+      <!-- room_detail_info.html -->
+
+
+    </ons-page>
+    <!-- tab2 -->
+  </template>
+  <!-- room.html -->
+
+  <!-- フッタータブバー トーク画面(tab3) -->
+  <template id="talk.html">
+    <ons-page id="talk">
+      <p style="text-align: center;">
+        トーク talk.html
+      </p>
+    </ons-page>
+    <!-- tab3 -->
+  </template>
+  <!-- talk.html -->
+
+  <!-- フッタータブバー マイページ画面(tab4) -->
+  <template id="mypage.html">
+    <ons-page id="mypage">
+      <p style="text-align: center;">
+        マイページ mypage.html
+      </p>
+    </ons-page>
+    <!-- tab4 -->
+  </template>
+  <!-- mypage.html -->

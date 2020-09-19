@@ -1,35 +1,21 @@
 <template>
     <v-ons-page>
-        <p>アババババ馬場b</p>
         <Tettt></Tettt>
         <Tettt></Tettt>
         <Tettt></Tettt>
         <Tettt></Tettt>
         <Tettt></Tettt>
+        <Login></Login>
         <Tettt></Tettt>
         <Tettt></Tettt>
         <Tettt></Tettt>
         <Tettt></Tettt>
-        <Tettt></Tettt>
-        <Tettt></Tettt>
-        <Tettt></Tettt>
-        <Tettt></Tettt>
-        <Tettt></Tettt>
-        <Tettt></Tettt>
-        <Tettt></Tettt>
-        <Tettt></Tettt>
-        <Tettt></Tettt>
-        <Tettt></Tettt>
-
-
-
      <h1>Firebase Auth Sample</h1>
       <div id="info"></div>
       <!-- <div id="firebaseui-auth-container"></div> -->
-      <div id="logout" class="hide">
-      <button @click="logout()" >ログアウト</button>
+      <!-- <div id="logout" class="hide"> -->
+      <!-- <button @click="logout()" >ログアウト</button> -->
       <p>${user.displayName}}</p>
-      </div>
 
       
 
@@ -41,12 +27,18 @@
 </template>
 
 <script>
-
+import Login from 'Login' 
 import Tettt from 'Tettt'
+
+
+import firebase from "firebase";
+import {db} from 'main.js';
+import 'firebase/auth';  
 
 export default{
   components:{
-    Tettt
+    Tettt,
+    Login
   }
 }
 
